@@ -1082,7 +1082,7 @@ document.getElementById('topic-modal').addEventListener('click', e => {
 let allNews = []
 let currentNewsTrack = 'all'
 
-async function loadNews() {
+window.loadNews = async function loadNews() {
   const el = document.getElementById('news-list')
   el.innerHTML = '<div style="text-align:center;padding:40px;color:var(--v-muted);font-size:13px">Loading...</div>'
 
