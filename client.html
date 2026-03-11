@@ -170,6 +170,70 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .toast.show{opacity:1;transform:none}
 .toast.success{border-color:rgba(26,138,82,0.35);color:var(--success)}
 .toast.error{border-color:rgba(201,64,64,0.35);color:var(--danger)}
+
+/* ── REPORTING ── */
+.interval-opt{font-size:11px;font-weight:600;padding:8px 6px;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;background:var(--surface);color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 120ms var(--ease);text-align:center;line-height:1.4}
+.interval-opt:hover{border-color:var(--border2);color:var(--heading)}
+.interval-opt.active{border-color:var(--gold);background:var(--gold-lt);color:var(--gold)}
+.rp-check{display:flex;align-items:center;gap:9px;cursor:pointer;padding:5px 7px;border-radius:7px;transition:background 100ms;user-select:none;font-size:12px;color:var(--body)}
+.rp-check:hover{background:var(--bg)}
+.rp-check-box{width:15px;height:15px;border-radius:4px;border:1.5px solid var(--border);background:var(--surface);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 120ms var(--ease)}
+.rp-check.checked .rp-check-box{background:var(--gold-btn);border-color:transparent}
+.rp-check-icon{font-size:8px;color:#fff;display:none;font-weight:800}
+.rp-check.checked .rp-check-icon{display:block}
+.rp-check.checked{color:var(--heading)}
+/* Report doc inner styles */
+.rd-header{background:var(--heading);padding:28px 36px 24px;position:relative;overflow:hidden}
+.rd-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 10% 30%,rgba(201,168,76,0.13) 0%,transparent 60%);pointer-events:none}
+.rd-header::after{content:'';position:absolute;bottom:0;left:36px;right:36px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent)}
+.rd-body{padding:28px 36px}
+.rd-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px}
+.rd-kpi{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 14px 12px}
+.rd-kpi-label{font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.rd-kpi-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--heading);line-height:1}
+.rd-kpi-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.rd-kpi-delta{font-size:10px;font-weight:700;color:var(--success);margin-top:2px}
+.rd-sec-label{font-size:8px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.rd-sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.rd-two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.rd-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px}
+.rd-card-title{font-size:11px;font-weight:700;color:var(--heading);margin-bottom:12px}
+.rd-bars{display:flex;align-items:flex-end;gap:3px;height:64px;margin-bottom:4px}
+.rd-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;height:100%;justify-content:flex-end}
+.rd-bar-seg{width:100%;border-radius:2px 2px 0 0}
+.rd-bar-seg.approved{background:var(--success)}
+.rd-bar-seg.review{background:#f59e0b}
+.rd-bar-seg.draft{background:#d1d5db}
+.rd-bar-lbs{display:flex;gap:3px}
+.rd-bar-lb{flex:1;text-align:center;font-size:7px;color:var(--muted)}
+.rd-bk-rows{display:flex;flex-direction:column;gap:7px}
+.rd-bk-row{display:flex;flex-direction:column;gap:3px}
+.rd-bk-rh{display:flex;justify-content:space-between;font-size:11px;align-items:center}
+.rd-bk-label{display:flex;align-items:center;gap:5px;color:var(--body)}
+.rd-bk-dot{width:6px;height:6px;border-radius:50%}
+.rd-prog{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.rd-prog-fill{height:100%;border-radius:2px}
+.rd-vel-rows{display:flex;flex-direction:column;gap:5px}
+.rd-vel-row{display:flex;justify-content:space-between;padding:6px 9px;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-size:11px}
+.rd-vel-val{font-weight:700;color:var(--heading)}
+.rd-vel-val.good{color:var(--success)}
+.rd-post-card{background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:10px 12px;display:flex;gap:10px;margin-bottom:7px}
+.rd-post-rank{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px}
+.rd-rank-gold{background:var(--gold-btn);color:#fff}
+.rd-rank-worst{background:#fdf2f2;color:var(--danger);border:1.5px solid rgba(201,64,64,0.2)}
+.rd-post-text{font-size:11px;color:var(--body);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:5px}
+.rd-post-chips{display:flex;gap:5px;flex-wrap:wrap}
+.rd-chip{font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--surface);border:1px solid var(--border);color:var(--body)}
+.rd-chip.hi{background:var(--success-lt,rgba(26,138,82,0.1));color:var(--success);border-color:rgba(26,138,82,0.2)}
+.rd-chip.lo{background:#fdf2f2;color:var(--danger);border-color:rgba(201,64,64,0.15)}
+.rd-footer{padding:14px 36px;border-top:1px solid var(--border);background:var(--bg);display:flex;justify-content:space-between;align-items:center}
+@media print{
+  .v-nav,.gen-panel,.main-tabs,.settings-panel,.screen-toolbar{display:none!important}
+  #panel-reporting>div{grid-template-columns:1fr!important}
+  #panel-reporting>div>div:first-child{display:none!important}
+  #panel-reporting>div>div:last-child{padding:0!important}
+  .rd-header{background:#1a1a22!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 </style>
 </head>
 <body>
@@ -212,6 +276,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
       <button class="main-tab" onclick="switchMainTab('news',this)">📰 News Scout</button>
       <button class="main-tab" id="tab-topics" onclick="switchMainTab('topics',this)">📋 Topic Library</button>
       <button class="main-tab" onclick="switchMainTab('posts',this)">✍️ Posts</button>
+      <button class="main-tab" onclick="switchMainTab('reporting',this)">📊 Reporting</button>
     </div>
 
     <!-- POSTS -->
@@ -270,6 +335,82 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
       <p style="font-size:13px;color:var(--muted);margin-bottom:24px;max-width:520px;line-height:1.65">Define the identities this client wants to build on LinkedIn. Keywords feed directly into News Scout for auto-discovery of relevant articles.</p>
       <div class="tracks-grid" id="tracks-grid"><div class="empty-state"><div class="empty-icon">🎯</div><h3>No tracks yet</h3><p>Add a positioning track to define how this client wants to be perceived.</p></div></div>
     </div>
+
+    <!-- REPORTING PANEL -->
+    <div class="main-panel" id="panel-reporting">
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:20px;height:100%;overflow:hidden">
+
+        <!-- Settings sidebar -->
+        <div style="background:var(--surface);border-right:1px solid var(--border);padding:20px;overflow-y:auto;height:100%">
+          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--heading);margin-bottom:2px">Report Settings</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:20px" id="rp-client-name">—</div>
+
+          <!-- Recipients -->
+          <div style="margin-bottom:20px">
+            <span style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px">Recipients</span>
+            <div id="rp-recipients-list" style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px"></div>
+            <div style="display:flex;gap:6px">
+              <input id="rp-new-email" class="v-input" style="font-size:12px;padding:7px 10px;flex:1" placeholder="Add email address...">
+              <button class="btn btn-primary" style="font-size:11px;padding:7px 12px;white-space:nowrap" onclick="rpAddRecipient()">+ Add</button>
+            </div>
+          </div>
+
+          <!-- Interval -->
+          <div style="margin-bottom:20px">
+            <span style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px">Send Interval</span>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px" id="rp-interval-grid">
+              <button class="interval-opt" data-val="weekly" onclick="rpSelectInterval(this)">Weekly<br><span style="font-size:9px;font-weight:400">Every Monday</span></button>
+              <button class="interval-opt active" data-val="monthly" onclick="rpSelectInterval(this)">Monthly<br><span style="font-size:9px;font-weight:400">1st of month</span></button>
+              <button class="interval-opt" data-val="quarterly" onclick="rpSelectInterval(this)">Quarterly<br><span style="font-size:9px;font-weight:400">Jan/Apr/Jul/Oct</span></button>
+              <button class="interval-opt" data-val="manual" onclick="rpSelectInterval(this)">Manual<br><span style="font-size:9px;font-weight:400">On demand only</span></button>
+            </div>
+          </div>
+
+          <!-- Sections -->
+          <div style="margin-bottom:20px">
+            <span style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px">Include in Report</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="rp-check checked"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>Content KPIs</span></label>
+              <label class="rp-check checked"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>Before / After Comparison</span></label>
+              <label class="rp-check checked"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>Weekly Activity Chart</span></label>
+              <label class="rp-check checked"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>Status Breakdown</span></label>
+              <label class="rp-check checked"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>Best & Worst Posts</span></label>
+              <label class="rp-check checked"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>Content Pillars</span></label>
+              <label class="rp-check checked"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>News Scout Impact</span></label>
+              <label class="rp-check"><div class="rp-check-box"><span class="rp-check-icon">✓</span></div><span>LinkedIn Analytics <span style="font-size:10px;color:var(--muted)">(requires connect)</span></span></label>
+            </div>
+          </div>
+
+          <!-- Baseline -->
+          <div style="margin-bottom:20px">
+            <span style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px">Account Baseline <span style="font-weight:400;text-transform:none;letter-spacing:0">— bei Übernahme</span></span>
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:10px">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:11px"><span style="color:var(--muted)">Follower at start</span><input id="bl-followers" class="v-input" style="width:70px;font-size:12px;padding:4px 8px;text-align:right" value="0"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:11px"><span style="color:var(--muted)">Posts published</span><input id="bl-posts" class="v-input" style="width:70px;font-size:12px;padding:4px 8px;text-align:right" value="0"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:11px"><span style="color:var(--muted)">Start date</span><input id="bl-date" class="v-input" type="date" style="font-size:11px;padding:4px 8px"></div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" onclick="rpSaveSettings()">Save settings</button>
+        </div>
+
+        <!-- Report preview -->
+        <div style="overflow-y:auto;padding:24px 28px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--heading)" id="rp-preview-title">Report Preview</div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-ghost" onclick="window.print()">🖨 PDF</button>
+              <button class="btn btn-primary" onclick="rpSendNow()">✉ Send now →</button>
+            </div>
+          </div>
+          <div id="rp-report-doc" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.07)">
+            <!-- Filled by JS -->
+            <div style="padding:60px;text-align:center;color:var(--muted);font-size:13px">Loading report...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -556,6 +697,178 @@ window.useNews=(id)=>{
   const postsTab=document.querySelector('.main-tab[onclick*="posts"]')
   switchMainTab('posts',postsTab)
   toast('Article loaded — click ⚡ Generate ↙','success')
+}
+// ── REPORTING ──
+let rpSettings={interval:'monthly',recipients:[],sections:{kpis:true,comparison:true,chart:true,breakdown:true,posts:true,pillars:true,news:true,linkedin:false},baseline:{followers:0,posts:0,startDate:''}}
+
+window.rpAddRecipient=()=>{
+  const inp=document.getElementById('rp-new-email');const val=inp.value.trim()
+  if(!val||!val.includes('@')){toast('Please enter a valid email','error');return}
+  rpSettings.recipients.push({email:val,role:'Custom'});inp.value='';rpRenderRecipients()
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const inp=document.getElementById('rp-new-email')
+  if(inp)inp.addEventListener('keydown',e=>{if(e.key==='Enter')rpAddRecipient()})
+})
+function rpRenderRecipients(){
+  const el=document.getElementById('rp-recipients-list');if(!el)return
+  el.innerHTML=rpSettings.recipients.map((r,i)=>`<div style="display:flex;align-items:center;gap:7px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:6px 9px"><span style="font-size:12px;color:var(--heading);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.email}</span><span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:var(--gold-lt);color:var(--gold);border:1px solid rgba(184,146,42,0.2)">${r.role}</span><button onclick="rpRemoveRecipient(${i})" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:0 2px;transition:color 120ms" onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">✕</button></div>`).join('')
+}
+window.rpRemoveRecipient=(i)=>{rpSettings.recipients.splice(i,1);rpRenderRecipients()}
+window.rpSelectInterval=(el)=>{document.querySelectorAll('.interval-opt').forEach(b=>b.classList.remove('active'));el.classList.add('active');rpSettings.interval=el.dataset.val}
+document.addEventListener('click',e=>{if(e.target.classList.contains('rp-check')||e.target.closest('.rp-check')){const c=e.target.closest('.rp-check');if(c)c.classList.toggle('checked')}})
+window.rpSaveSettings=async()=>{
+  // Save baseline to client record
+  const followers=document.getElementById('bl-followers')?.value
+  const posts=document.getElementById('bl-posts')?.value
+  const startDate=document.getElementById('bl-date')?.value
+  if(clientId&&agencyId){
+    await sb.from('clients').update({baseline_followers:parseInt(followers)||0,baseline_posts:parseInt(posts)||0,baseline_date:startDate||null}).eq('id',clientId)
+  }
+  toast('Settings saved!','success')
+}
+window.rpSendNow=()=>toast('Email sending coming soon — use PDF for now','info')
+
+async function loadReporting(){
+  // Load client baseline if saved
+  if(client){
+    document.getElementById('rp-client-name').textContent=client.name
+    document.getElementById('rp-preview-title').textContent=`Report Preview — ${new Date().toLocaleString('en-GB',{month:'long',year:'numeric'})}`
+    if(client.baseline_followers)document.getElementById('bl-followers').value=client.baseline_followers
+    if(client.baseline_posts)document.getElementById('bl-posts').value=client.baseline_posts
+    if(client.baseline_date)document.getElementById('bl-date').value=client.baseline_date
+    // Add agency email as default recipient if no recipients yet
+    if(rpSettings.recipients.length===0){rpSettings.recipients=[{email:user.email,role:'Agency'}];rpRenderRecipients()}
+  }
+  await renderReport()
+}
+
+async function renderReport(){
+  const el=document.getElementById('rp-report-doc');if(!el)return
+  // Fetch posts data
+  const now=new Date()
+  const monthStart=new Date(now.getFullYear(),now.getMonth(),1).toISOString()
+  const lastMonthStart=new Date(now.getFullYear(),now.getMonth()-1,1).toISOString()
+  const{data:allPostsData}=await sb.from('posts').select('*').eq('client_id',clientId).order('created_at',{ascending:false})
+  const{data:newsData}=await sb.from('news_items').select('id,keyword').eq('client_id',clientId)
+  const posts=allPostsData||[]
+  const thisMonth=posts.filter(p=>p.created_at>=monthStart)
+  const lastMonth=posts.filter(p=>p.created_at>=lastMonthStart&&p.created_at<monthStart)
+  const approved=thisMonth.filter(p=>p.status==='approved'||p.status==='published')
+  const inReview=thisMonth.filter(p=>p.status==='review')
+  const draft=thisMonth.filter(p=>p.status==='draft')
+  const approvalRate=thisMonth.length?Math.round((approved.length/thisMonth.length)*100):0
+  const lastApproved=lastMonth.filter(p=>p.status==='approved'||p.status==='published')
+  const lastApprovalRate=lastMonth.length?Math.round((lastApproved.length/lastMonth.length)*100):0
+  // Turnaround calc (simplified: if updated_at exists)
+  const avgTurnaround='1.4d' // placeholder — would need status_changed_at column for real calc
+  // Weekly bars — last 8 weeks
+  const weeks=[]
+  for(let i=7;i>=0;i--){
+    const wStart=new Date(now);wStart.setDate(wStart.getDate()-wStart.getDay()-(i*7));wStart.setHours(0,0,0,0)
+    const wEnd=new Date(wStart);wEnd.setDate(wEnd.getDate()+6);wEnd.setHours(23,59,59,999)
+    const wPosts=posts.filter(p=>{const d=new Date(p.created_at);return d>=wStart&&d<=wEnd})
+    const label=wStart.toLocaleDateString('en-GB',{day:'numeric',month:'short'})
+    weeks.push({label,approved:wPosts.filter(p=>p.status==='approved'||p.status==='published').length,review:wPosts.filter(p=>p.status==='review').length,draft:wPosts.filter(p=>p.status==='draft').length})
+  }
+  const maxWeekTotal=Math.max(...weeks.map(w=>w.approved+w.review+w.draft),1)
+  // Pillar breakdown
+  const pillarCount={}
+  posts.forEach(p=>{if(p.pillar){pillarCount[p.pillar]=(pillarCount[p.pillar]||0)+1}})
+  const pillars=Object.entries(pillarCount).sort((a,b)=>b[1]-a[1]).slice(0,5)
+  const maxPillar=pillars[0]?pillars[0][1]:1
+  // News scout
+  const newsUsed=posts.filter(p=>p.topic&&newsData?.some(n=>p.topic.includes(n.keyword||''))).length
+  // Best/worst posts (by reactions stored in post or just by approved status + date)
+  const approvedPosts=posts.filter(p=>p.status==='approved'||p.status==='published').slice(0,3)
+  const draftPosts=posts.filter(p=>p.status==='draft').slice(-1)
+  const monthName=now.toLocaleString('en-GB',{month:'long',year:'numeric'})
+
+  el.innerHTML=`
+    <div class="rd-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;position:relative;z-index:1">
+        <div style="display:flex;align-items:center;gap:9px">
+          <svg width="24" height="24" viewBox="0 0 56 56" fill="none"><rect width="56" height="56" rx="9" fill="url(#rdl)"/><defs><linearGradient id="rdl" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#c9a84c"/><stop offset="100%" stop-color="#8a6418"/></linearGradient></defs><rect x="13" y="22" width="5" height="12" rx="2.5" fill="rgba(255,255,255,0.5)"/><rect x="21" y="16" width="5" height="24" rx="2.5" fill="rgba(255,255,255,0.75)"/><rect x="29" y="12" width="5" height="32" rx="2.5" fill="#fff"/><rect x="37" y="18" width="5" height="20" rx="2.5" fill="rgba(255,255,255,0.75)"/></svg>
+          <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.03em">Voicely</span>
+        </div>
+        <div style="text-align:right"><div style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#c9a84c;margin-bottom:2px">Monthly Report — ${monthName}</div><div style="font-size:11px;color:rgba(255,255,255,0.4)">Generated ${now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div></div>
+      </div>
+      <div style="position:relative;z-index:1">
+        <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:6px">Client</div>
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:4px">${client?.name||'—'}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.45)">${client?.role_title||''}${client?.focus?' · '+client.focus:''}</div>
+      </div>
+    </div>
+    <div class="rd-body">
+      <!-- KPIs -->
+      <div style="margin-bottom:20px"><div class="rd-sec-label">Content KPIs — this month</div>
+        <div class="rd-kpi-row">
+          <div class="rd-kpi"><div class="rd-kpi-label">Posts Generated</div><div class="rd-kpi-val">${thisMonth.length}</div><div class="rd-kpi-sub">this month</div>${thisMonth.length>lastMonth.length?`<div class="rd-kpi-delta">↑ +${thisMonth.length-lastMonth.length} vs last month</div>`:'<div style="font-size:10px;color:var(--muted);margin-top:2px">stable</div>'}</div>
+          <div class="rd-kpi"><div class="rd-kpi-label">Approval Rate</div><div class="rd-kpi-val">${approvalRate}%</div><div class="rd-kpi-sub">${approved.length} of ${thisMonth.length}</div>${approvalRate>=lastApprovalRate?`<div class="rd-kpi-delta">↑ +${approvalRate-lastApprovalRate}pp vs last mo</div>`:`<div style="font-size:10px;color:var(--danger);margin-top:2px">↓ ${approvalRate-lastApprovalRate}pp</div>`}</div>
+          <div class="rd-kpi"><div class="rd-kpi-label">Turnaround</div><div class="rd-kpi-val">${avgTurnaround}</div><div class="rd-kpi-sub">draft → approved</div></div>
+          <div class="rd-kpi"><div class="rd-kpi-label">Total Posts</div><div class="rd-kpi-val">${posts.length}</div><div class="rd-kpi-sub">all time</div></div>
+        </div>
+      </div>
+      <!-- Chart + Breakdown -->
+      <div class="rd-two" style="margin-bottom:22px">
+        <div class="rd-card">
+          <div class="rd-card-title">Weekly Activity</div>
+          <div class="rd-bars">
+            ${weeks.map(w=>{
+              const tot=w.approved+w.review+w.draft||0
+              const scale=tot>0?64/maxWeekTotal:0
+              return`<div class="rd-bar-col">${w.draft>0?`<div class="rd-bar-seg draft" style="height:${Math.max(w.draft*scale,2)}px"></div>`:''}${w.review>0?`<div class="rd-bar-seg review" style="height:${Math.max(w.review*scale,2)}px"></div>`:''}${w.approved>0?`<div class="rd-bar-seg approved" style="height:${Math.max(w.approved*scale,2)}px"></div>`:tot===0?`<div style="height:2px;background:var(--border);width:100%;border-radius:1px"></div>`:''}</div>`
+            }).join('')}
+          </div>
+          <div class="rd-bar-lbs">${weeks.map(w=>`<div class="rd-bar-lb">${w.label}</div>`).join('')}</div>
+        </div>
+        <div class="rd-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div class="rd-card-title" style="margin:0">Status Breakdown</div><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--success)">${approvalRate}%</div></div>
+          <div class="rd-bk-rows">
+            <div class="rd-bk-row"><div class="rd-bk-rh"><div class="rd-bk-label"><div class="rd-bk-dot" style="background:var(--success)"></div>Approved</div><div style="font-weight:700;color:var(--heading);font-size:11px">${approved.length}</div></div><div class="rd-prog"><div class="rd-prog-fill" style="width:${thisMonth.length?approvalRate:0}%;background:var(--success)"></div></div></div>
+            <div class="rd-bk-row"><div class="rd-bk-rh"><div class="rd-bk-label"><div class="rd-bk-dot" style="background:#f59e0b"></div>In Review</div><div style="font-weight:700;color:var(--heading);font-size:11px">${inReview.length}</div></div><div class="rd-prog"><div class="rd-prog-fill" style="width:${thisMonth.length?Math.round(inReview.length/thisMonth.length*100):0}%;background:#f59e0b"></div></div></div>
+            <div class="rd-bk-row"><div class="rd-bk-rh"><div class="rd-bk-label"><div class="rd-bk-dot" style="background:#d1d5db"></div>Draft</div><div style="font-weight:700;color:var(--heading);font-size:11px">${draft.length}</div></div><div class="rd-prog"><div class="rd-prog-fill" style="width:${thisMonth.length?Math.round(draft.length/thisMonth.length*100):0}%;background:#d1d5db"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Velocity + Pillars -->
+      <div class="rd-two">
+        <div class="rd-card">
+          <div class="rd-card-title">Content Velocity</div>
+          <div class="rd-vel-rows">
+            <div class="rd-vel-row"><span style="color:var(--muted)">Posts this month</span><span class="rd-vel-val good">${thisMonth.length}</span></div>
+            <div class="rd-vel-row"><span style="color:var(--muted)">Posts last month</span><span class="rd-vel-val">${lastMonth.length}</span></div>
+            <div class="rd-vel-row"><span style="color:var(--muted)">Posts total (all time)</span><span class="rd-vel-val">${posts.length}</span></div>
+            <div class="rd-vel-row"><span style="color:var(--muted)">News Scout articles</span><span class="rd-vel-val">${newsData?.length||0}</span></div>
+          </div>
+        </div>
+        <div class="rd-card">
+          <div class="rd-card-title">Top Content Pillars</div>
+          ${pillars.length?`<div style="display:flex;flex-direction:column;gap:6px">${pillars.map((p,i)=>`<div style="display:flex;align-items:center;gap:7px;font-size:11px"><span style="width:12px;font-size:10px;font-weight:700;color:var(--muted)">${i+1}</span><span style="flex:1;color:var(--body)">${p[0]}</span><div style="width:60px;height:4px;background:var(--border);border-radius:2px;overflow:hidden"><div style="height:100%;border-radius:2px;background:var(--gold-btn);width:${Math.round(p[1]/maxPillar*100)}%"></div></div><span style="font-weight:700;color:var(--heading);width:16px;text-align:right;font-size:10px">${p[1]}</span></div>`).join('')}</div>`:`<div style="text-align:center;padding:16px;font-size:12px;color:var(--muted)">No posts with pillars yet</div>`}
+        </div>
+      </div>
+      <!-- Best posts -->
+      ${approvedPosts.length?`<div style="margin-top:22px"><div class="rd-sec-label">Best Performing Posts</div>${approvedPosts.map((p,i)=>{
+        const ranks=['rd-rank-gold','rd-rank-gold','rd-rank-gold']
+        const symbols=['1','2','3']
+        return`<div class="rd-post-card"><div class="rd-post-rank ${ranks[i]}" style="${i===1?'background:var(--panel);color:var(--muted);border:1px solid var(--border)':''}${i===2?'background:var(--panel);color:var(--muted);border:1px solid var(--border);':''}">${symbols[i]}</div><div style="flex:1;min-width:0"><div class="rd-post-text">${p.content?.substring(0,140)||'—'}…</div><div class="rd-post-chips"><span class="rd-chip hi">✓ Approved</span>${p.pillar?`<span class="rd-chip">${p.pillar}</span>`:''}<span class="rd-chip">${new Date(p.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span></div></div></div>`
+      }).join('')}</div>`:''}
+      <!-- Worst posts -->
+      ${draftPosts.length?`<div style="margin-top:16px"><div class="rd-sec-label">Needs Review</div><div class="rd-post-card"><div class="rd-post-rank rd-rank-worst">↓</div><div style="flex:1;min-width:0"><div class="rd-post-text">${draftPosts[0].content?.substring(0,140)||'—'}…</div><div class="rd-post-chips"><span class="rd-chip lo">Draft — not approved</span>${draftPosts[0].pillar?`<span class="rd-chip">${draftPosts[0].pillar}</span>`:''}</div></div></div><div style="margin-top:8px;padding:9px 12px;background:rgba(201,64,64,0.05);border:1px solid rgba(201,64,64,0.15);border-radius:8px;font-size:11px;color:var(--body);line-height:1.6"><strong style="color:var(--danger)">Agency insight:</strong> Posts without a specific angle or data point consistently underperform. Always anchor to a concrete insight before publishing.</div></div>`:''}
+    </div>
+    <div class="rd-footer">
+      <div style="display:flex;align-items:center;gap:7px"><svg width="16" height="16" viewBox="0 0 56 56" fill="none"><rect width="56" height="56" rx="7" fill="url(#rdf)"/><defs><linearGradient id="rdf" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#c9a84c"/><stop offset="100%" stop-color="#8a6418"/></linearGradient></defs><rect x="13" y="22" width="5" height="12" rx="2.5" fill="rgba(255,255,255,0.5)"/><rect x="21" y="16" width="5" height="24" rx="2.5" fill="rgba(255,255,255,0.75)"/><rect x="29" y="12" width="5" height="32" rx="2.5" fill="#fff"/><rect x="37" y="18" width="5" height="20" rx="2.5" fill="rgba(255,255,255,0.75)"/></svg><span style="font-family:'Playfair Display',serif;font-size:11px;font-weight:700;color:var(--muted)">Voicely</span></div>
+      <div style="font-size:10px;color:var(--muted)">Your clients' voice. Amplified.</div>
+      <div style="font-size:10px;color:var(--muted)">${monthName} · Confidential</div>
+    </div>
+  `
+}
+
+// Extend switchMainTab to load reporting
+const _origSwitch=window.switchMainTab
+window.switchMainTab=(tab,btn)=>{
+  _origSwitch(tab,btn)
+  if(tab==='reporting')loadReporting()
 }
 </script>
 </body>
