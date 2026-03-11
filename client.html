@@ -206,16 +206,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
     </div>
   </aside>
   <div class="right-panel">
-    <!-- NEW TAB ORDER: Posts | News Scout | Topic Library | Positioning -->
+    <!-- TAB ORDER: Positioning → News Scout → Topic Library → Posts -->
     <div class="main-tabs">
-      <button class="main-tab active" onclick="switchMainTab('posts',this)">✍️ Posts</button>
+      <button class="main-tab active" onclick="switchMainTab('tracks',this)">🎯 Positioning</button>
       <button class="main-tab" onclick="switchMainTab('news',this)">📰 News Scout</button>
       <button class="main-tab" id="tab-topics" onclick="switchMainTab('topics',this)">📋 Topic Library</button>
-      <button class="main-tab" onclick="switchMainTab('tracks',this)">🎯 Positioning</button>
+      <button class="main-tab" onclick="switchMainTab('posts',this)">✍️ Posts</button>
     </div>
 
     <!-- POSTS -->
-    <div class="main-panel active" id="panel-posts">
+    <div class="main-panel" id="panel-posts">
       <div class="panel-header"><h2 class="panel-title" id="posts-title">Posts</h2><span style="font-size:12px;color:var(--muted)" id="posts-count"></span></div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterPosts('all',this)">All</button>
@@ -265,7 +265,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
     </div>
 
     <!-- POSITIONING -->
-    <div class="main-panel" id="panel-tracks">
+    <div class="main-panel active" id="panel-tracks">
       <div class="panel-header"><h2 class="panel-title">Positioning Tracks</h2><button class="btn btn-primary" onclick="openTrackModal()">+ Add track</button></div>
       <p style="font-size:13px;color:var(--muted);margin-bottom:24px;max-width:520px;line-height:1.65">Define the identities this client wants to build on LinkedIn. Keywords feed directly into News Scout for auto-discovery of relevant articles.</p>
       <div class="tracks-grid" id="tracks-grid"><div class="empty-state"><div class="empty-icon">🎯</div><h3>No tracks yet</h3><p>Add a positioning track to define how this client wants to be perceived.</p></div></div>
@@ -419,7 +419,7 @@ window.saveClientProfile=async()=>{
 }
 document.getElementById('edit-modal').addEventListener('click',e=>{if(e.target===document.getElementById('edit-modal'))closeEditModal()})
 window.toast=(msg,type='')=>{const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;document.getElementById('toasts').appendChild(el);setTimeout(()=>el.classList.add('show'),10);setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),300)},3000)}
-await loadClient();await loadPosts()
+await loadClient();await loadPosts();await loadTracks()
 window.switchMainTab=(tab,btn)=>{document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('panel-'+tab).classList.add('active');if(tab==='topics')loadTopics();if(tab==='tracks')loadTracks();if(tab==='news')loadNews()}
 let allTracks=[]
 async function loadTracks(){
