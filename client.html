@@ -152,6 +152,45 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--v-border);border-radius:99px}
+
+/* ── MAIN TABS ──────────────────────────────────── */
+.main-tabs{display:flex;gap:2px;border-bottom:1px solid var(--v-border);margin-bottom:24px}
+.main-tab{font-size:13px;font-weight:600;padding:10px 18px;border:none;background:none;font-family:"Syne",sans-serif;color:var(--v-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 120ms var(--ease)}
+.main-tab:hover{color:var(--v-ink)}
+.main-tab.active{color:var(--v-signal);border-bottom-color:var(--v-signal)}
+.main-panel{display:none}
+.main-panel.active{display:block;animation:fadeUp 0.3s var(--ease) both}
+
+/* ── TOPICS BOARD ───────────────────────────────── */
+.topics-board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.topics-col{background:var(--v-subtle);border:1px solid var(--v-border);border-radius:12px;overflow:hidden}
+.topics-col-header{display:flex;align-items:center;gap:8px;padding:12px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--v-muted);border-bottom:1px solid var(--v-border);background:var(--v-surface)}
+.topics-col-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.topics-col-count{margin-left:auto;background:var(--v-border);border-radius:20px;padding:1px 7px;font-size:10px}
+.topics-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:120px}
+.topic-card{background:var(--v-surface);border:1px solid var(--v-border);border-radius:9px;padding:12px;cursor:pointer;transition:box-shadow 150ms var(--ease)}
+.topic-card:hover{box-shadow:0 4px 12px rgba(10,10,15,0.08)}
+.topic-card-title{font-size:13px;font-weight:600;color:var(--v-ink);margin-bottom:6px;line-height:1.4}
+.topic-card-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.topic-date{font-size:10px;color:var(--v-muted)}
+.priority-high{color:#dc2626;font-size:10px;font-weight:700}
+.priority-normal{color:var(--v-muted);font-size:10px}
+
+/* ── TRACK FILTER ───────────────────────────────── */
+.track-filter-btn{font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;border:1.5px solid var(--v-border);cursor:pointer;background:var(--v-surface);color:var(--v-muted);font-family:"Syne",sans-serif;transition:all 120ms var(--ease)}
+.track-filter-btn.active{border-color:var(--v-signal);background:var(--v-signal-lt);color:var(--v-signal)}
+
+/* ── TRACKS GRID ────────────────────────────────── */
+.tracks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.track-card{background:var(--v-surface);border:1px solid var(--v-border);border-radius:12px;overflow:hidden;transition:transform 200ms var(--ease),box-shadow 200ms var(--ease)}
+.track-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,10,15,0.08)}
+.track-card-bar{height:4px}
+.track-card-body{padding:16px}
+.track-card-name{font-size:14px;font-weight:700;color:var(--v-ink);margin-bottom:4px}
+.track-card-desc{font-size:12px;color:var(--v-muted);margin-bottom:12px;line-height:1.5}
+.track-keywords{display:flex;flex-wrap:wrap;gap:4px}
+.track-keyword{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:var(--v-subtle);color:var(--v-body);border:1px solid var(--v-border)}
+.track-card-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--v-border)}
 </style>
 </head>
 <body>
@@ -253,8 +292,18 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
     </div>
   </aside>
 
-  <!-- RIGHT: POSTS -->
+  <!-- RIGHT: MAIN TABS -->
   <main class="posts-panel">
+
+    <!-- Main navigation tabs -->
+    <div class="main-tabs">
+      <button class="main-tab active" onclick="switchMainTab('posts', this)">✍️ Posts</button>
+      <button class="main-tab" onclick="switchMainTab('topics', this)">📋 Topic Library</button>
+      <button class="main-tab" onclick="switchMainTab('tracks', this)">🎯 Positioning</button>
+    </div>
+
+    <!-- ── POSTS TAB ── -->
+    <div class="main-panel active" id="panel-posts">
     <div class="posts-header">
       <h2 id="posts-title">Posts</h2>
       <span id="posts-count" style="font-size:13px;color:var(--v-muted)"></span>
@@ -274,7 +323,146 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
         <p>Use the generator on the left to create your first post.</p>
       </div>
     </div>
+    </div><!-- end panel-posts -->
+
+    <!-- ── TOPICS TAB ── -->
+    <div class="main-panel" id="panel-topics">
+      <div class="posts-header">
+        <h2>Topic Library</h2>
+        <button class="btn btn-primary" onclick="openTopicModal()">+ Add topic</button>
+      </div>
+
+      <!-- Track filter -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="track-filter-bar">
+        <button class="track-filter-btn active" data-track="all" onclick="filterTopics('all',this)">All tracks</button>
+      </div>
+
+      <!-- Kanban-style status columns -->
+      <div class="topics-board">
+        <div class="topics-col">
+          <div class="topics-col-header">
+            <span class="topics-col-dot" style="background:#8a8a99"></span>
+            Open <span class="topics-col-count" id="count-open">0</span>
+          </div>
+          <div class="topics-col-body" id="col-open"></div>
+        </div>
+        <div class="topics-col">
+          <div class="topics-col-header">
+            <span class="topics-col-dot" style="background:#d97706"></span>
+            In Progress <span class="topics-col-count" id="count-progress">0</span>
+          </div>
+          <div class="topics-col-body" id="col-progress"></div>
+        </div>
+        <div class="topics-col">
+          <div class="topics-col-header">
+            <span class="topics-col-dot" style="background:#16a34a"></span>
+            Used <span class="topics-col-count" id="count-used">0</span>
+          </div>
+          <div class="topics-col-body" id="col-used"></div>
+        </div>
+      </div>
+    </div><!-- end panel-topics -->
+
+    <!-- ── POSITIONING TAB ── -->
+    <div class="main-panel" id="panel-tracks">
+      <div class="posts-header">
+        <h2>Positioning Tracks</h2>
+        <button class="btn btn-primary" onclick="openTrackModal()">+ Add track</button>
+      </div>
+      <p style="font-size:13px;color:var(--v-muted);margin-bottom:24px;max-width:560px">
+        Define the different identities this client wants to build on LinkedIn. Each track has its own keywords, pillars, and tone — the News Scout uses these to surface relevant articles.
+      </p>
+      <div class="tracks-grid" id="tracks-grid">
+        <div class="empty-state">
+          <div class="empty-icon">🎯</div>
+          <h3>No tracks yet</h3>
+          <p>Add a positioning track to define how this client wants to be perceived.</p>
+        </div>
+      </div>
+    </div><!-- end panel-tracks -->
+
   </main>
+</div>
+
+<!-- TOPIC MODAL -->
+<div class="overlay" id="topic-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add topic</h3>
+      <button class="btn btn-ghost" onclick="closeTopicModal()" style="padding:5px 9px;font-size:15px">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Topic / Headline *</label>
+        <input class="v-input" id="t-title" placeholder="e.g. Why food retail beats office in 2026">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Positioning track</label>
+        <select class="v-select" id="t-track"><option value="">— No track —</option></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Content pillar</label>
+        <select class="v-select" id="t-pillar">
+          <option value="">— Select —</option>
+          <option>Market Insight</option><option>Deal Anatomy</option>
+          <option>AI & Tools</option><option>Strong Opinion</option><option>Process</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Priority</label>
+        <select class="v-select" id="t-priority">
+          <option value="normal">Normal</option>
+          <option value="high">High</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Planned for</label>
+        <input class="v-input" type="date" id="t-date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Notes</label>
+        <textarea class="v-textarea" id="t-notes" placeholder="Angle, sources, key arguments..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeTopicModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveTopic()">Save topic →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRACK MODAL -->
+<div class="overlay" id="track-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>New positioning track</h3>
+      <button class="btn btn-ghost" onclick="closeTrackModal()" style="padding:5px 9px;font-size:15px">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Track name *</label>
+        <input class="v-input" id="tr-name" placeholder="e.g. Real Estate Expert, Leader & Transformation, Entrepreneur">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <input class="v-input" id="tr-desc" placeholder="How should the audience perceive this person?">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Keywords for News Scout</label>
+        <textarea class="v-textarea" id="tr-keywords" placeholder="One keyword per line e.g.&#10;Büromarkt&#10;Einzelhandel&#10;REPE&#10;Transaktion" style="min-height:100px"></textarea>
+        <span class="form-hint">These keywords are used to find relevant news articles automatically.</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Accent color</label>
+        <input type="color" id="tr-color" value="#5b4fff" style="height:36px;width:60px;border:1px solid var(--v-border);border-radius:6px;cursor:pointer">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeTrackModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveTrack()">Create track →</button>
+    </div>
+  </div>
 </div>
 
 <!-- EDIT CLIENT MODAL -->
@@ -634,6 +822,228 @@ window.toast = (msg, type='') => {
 // ── Init ─────────────────────────────────────────
 await loadClient()
 await loadPosts()
+
+// ── MAIN TAB SWITCHING ───────────────────────────
+window.switchMainTab = (tab, btn) => {
+  document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'))
+  document.querySelectorAll('.main-panel').forEach(p => p.classList.remove('active'))
+  btn.classList.add('active')
+  document.getElementById('panel-' + tab).classList.add('active')
+  if (tab === 'topics') loadTopics()
+  if (tab === 'tracks') loadTracks()
+}
+
+// ── TRACKS ───────────────────────────────────────
+let allTracks = []
+
+async function loadTracks() {
+  const { data } = await sb.from('positioning_tracks').select('*')
+    .eq('client_id', clientId).order('created_at')
+  allTracks = data || []
+  renderTracks()
+  updateTrackFilter()
+  updateTrackSelect()
+}
+
+function renderTracks() {
+  const el = document.getElementById('tracks-grid')
+  if (!allTracks.length) {
+    el.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-icon">🎯</div>
+      <h3>No tracks yet</h3>
+      <p>Add a positioning track to define how this client wants to be perceived.</p>
+    </div>`
+    return
+  }
+  el.innerHTML = allTracks.map(t => {
+    const kws = (t.keywords || []).slice(0,5)
+    return `<div class="track-card">
+      <div class="track-card-bar" style="background:${t.color || '#5b4fff'}"></div>
+      <div class="track-card-body">
+        <div class="track-card-name">${t.name}</div>
+        <div class="track-card-desc">${t.description || 'No description'}</div>
+        <div class="track-keywords">
+          ${kws.map(k => `<span class="track-keyword">${k}</span>`).join('')}
+          ${(t.keywords||[]).length > 5 ? `<span class="track-keyword">+${(t.keywords||[]).length-5}</span>` : ''}
+        </div>
+      </div>
+      <div class="track-card-footer">
+        <span style="font-size:11px;color:var(--v-muted)">${(t.keywords||[]).length} keywords</span>
+        <button class="btn btn-danger" style="font-size:11px;padding:4px 10px" onclick="deleteTrack('${t.id}')">Delete</button>
+      </div>
+    </div>`
+  }).join('')
+}
+
+function updateTrackFilter() {
+  const bar = document.getElementById('track-filter-bar')
+  const existing = bar.querySelectorAll('[data-track]:not([data-track="all"])')
+  existing.forEach(e => e.remove())
+  allTracks.forEach(t => {
+    const btn = document.createElement('button')
+    btn.className = 'track-filter-btn'
+    btn.dataset.track = t.id
+    btn.textContent = t.name
+    btn.onclick = () => filterTopics(t.id, btn)
+    bar.appendChild(btn)
+  })
+}
+
+function updateTrackSelect() {
+  const sel = document.getElementById('t-track')
+  if (!sel) return
+  sel.innerHTML = '<option value="">— No track —</option>' +
+    allTracks.map(t => `<option value="${t.id}">${t.name}</option>`).join('')
+}
+
+window.openTrackModal  = () => document.getElementById('track-modal').classList.add('open')
+window.closeTrackModal = () => document.getElementById('track-modal').classList.remove('open')
+
+window.saveTrack = async () => {
+  const name = document.getElementById('tr-name').value.trim()
+  if (!name) { toast('Track name required', 'error'); return }
+  const raw = document.getElementById('tr-keywords').value
+  const keywords = raw.split('\n').map(k=>k.trim()).filter(Boolean)
+  await sb.from('positioning_tracks').insert({
+    client_id: clientId,
+    name,
+    description: document.getElementById('tr-desc').value.trim(),
+    keywords,
+    color: document.getElementById('tr-color').value
+  })
+  closeTrackModal()
+  toast('Track created!', 'success')
+  await loadTracks()
+}
+
+window.deleteTrack = async (id) => {
+  if (!confirm('Delete this track?')) return
+  await sb.from('positioning_tracks').delete().eq('id', id)
+  toast('Track deleted')
+  await loadTracks()
+}
+
+document.getElementById('track-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('track-modal')) closeTrackModal()
+})
+
+// ── TOPICS ───────────────────────────────────────
+let allTopics = []
+let currentTrackFilter = 'all'
+
+async function loadTopics() {
+  const { data } = await sb.from('topics').select('*')
+    .eq('client_id', clientId).order('created_at', { ascending: false })
+  allTopics = data || []
+  await loadTracks()
+  renderTopics()
+}
+
+function renderTopics() {
+  const filtered = currentTrackFilter === 'all'
+    ? allTopics
+    : allTopics.filter(t => t.track_id === currentTrackFilter)
+
+  const open     = filtered.filter(t => t.status === 'open')
+  const progress = filtered.filter(t => t.status === 'in_progress')
+  const used     = filtered.filter(t => t.status === 'used')
+
+  document.getElementById('count-open').textContent = open.length
+  document.getElementById('count-progress').textContent = progress.length
+  document.getElementById('count-used').textContent = used.length
+
+  renderTopicCol('col-open', open)
+  renderTopicCol('col-progress', progress)
+  renderTopicCol('col-used', used)
+}
+
+function renderTopicCol(colId, topics) {
+  const el = document.getElementById(colId)
+  if (!topics.length) {
+    el.innerHTML = '<div style="text-align:center;padding:20px;font-size:12px;color:var(--v-muted)">Empty</div>'
+    return
+  }
+  const track = (id) => allTracks.find(t => t.id === id)
+  el.innerHTML = topics.map(t => {
+    const tr = track(t.track_id)
+    const dateStr = t.planned_for ? new Date(t.planned_for).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : ''
+    return `<div class="topic-card" onclick="openTopicDetail('${t.id}')">
+      <div class="topic-card-title">${t.title}</div>
+      <div class="topic-card-meta">
+        ${tr ? `<span style="font-size:10px;font-weight:700;color:${tr.color||'#5b4fff'};background:${tr.color||'#5b4fff'}18;padding:2px 7px;border-radius:20px">${tr.name}</span>` : ''}
+        ${t.pillar ? `<span class="badge b-pillar" style="font-size:9px">${t.pillar}</span>` : ''}
+        ${t.priority === 'high' ? '<span class="priority-high">↑ High</span>' : ''}
+        ${dateStr ? `<span class="topic-date">📅 ${dateStr}</span>` : ''}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        ${t.status !== 'in_progress' ? `<button class="btn btn-ghost" style="font-size:10px;padding:3px 8px" onclick="event.stopPropagation();updateTopicStatus('${t.id}','in_progress')">→ In Progress</button>` : ''}
+        ${t.status !== 'used' ? `<button class="btn btn-success" style="font-size:10px;padding:3px 8px" onclick="event.stopPropagation();updateTopicStatus('${t.id}','used')">✓ Used</button>` : ''}
+        <button class="btn btn-danger" style="font-size:10px;padding:3px 8px;margin-left:auto" onclick="event.stopPropagation();deleteTopic('${t.id}')">✕</button>
+      </div>
+    </div>`
+  }).join('')
+}
+
+window.filterTopics = (trackId, btn) => {
+  currentTrackFilter = trackId
+  document.querySelectorAll('.track-filter-btn').forEach(b => b.classList.remove('active'))
+  btn.classList.add('active')
+  renderTopics()
+}
+
+window.openTopicModal  = () => {
+  updateTrackSelect()
+  document.getElementById('topic-modal').classList.add('open')
+}
+window.closeTopicModal = () => document.getElementById('topic-modal').classList.remove('open')
+
+window.saveTopic = async () => {
+  const title = document.getElementById('t-title').value.trim()
+  if (!title) { toast('Topic title required', 'error'); return }
+  await sb.from('topics').insert({
+    client_id:  clientId,
+    title,
+    track_id:   document.getElementById('t-track').value || null,
+    pillar:     document.getElementById('t-pillar').value || null,
+    priority:   document.getElementById('t-priority').value,
+    planned_for:document.getElementById('t-date').value || null,
+    notes:      document.getElementById('t-notes').value.trim(),
+    status:     'open'
+  })
+  closeTopicModal()
+  toast('Topic added!', 'success')
+  // reset
+  document.getElementById('t-title').value = ''
+  document.getElementById('t-notes').value = ''
+  document.getElementById('t-date').value = ''
+  await loadTopics()
+}
+
+window.updateTopicStatus = async (id, status) => {
+  await sb.from('topics').update({ status }).eq('id', id)
+  await loadTopics()
+}
+
+window.deleteTopic = async (id) => {
+  if (!confirm('Delete topic?')) return
+  await sb.from('topics').delete().eq('id', id)
+  toast('Deleted')
+  await loadTopics()
+}
+
+window.openTopicDetail = (id) => {
+  const t = allTopics.find(x => x.id === id)
+  if (!t) return
+  // prefill generator with this topic
+  document.getElementById('gen-topic').value = t.title
+  switchMainTab('posts', document.querySelector('.main-tab'))
+  toast('Topic loaded into generator ↑', 'success')
+}
+
+document.getElementById('topic-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('topic-modal')) closeTopicModal()
+})
+
 </script>
 </body>
 </html>
