@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Voicely — Client</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#fafaf8;--surface:#fff;--panel:#f4f4f1;--panel2:#efefe9;--border:#e8e8e2;--border2:#d0d0c8;
-  --muted:#9898a0;--body:#52525e;--heading:#1a1a22;
-  --gold:#b8922a;--gold-lt:rgba(184,146,42,0.08);--gold-md:rgba(184,146,42,0.14);
-  --gold-dk:#8a6a18;--gold-btn:linear-gradient(135deg,#c9a84c,#a07830);
-  --success:#1a8a52;--danger:#c94040;--ease:cubic-bezier(0.16,1,0.3,1)
-}
+:root{--bg:#fafaf8;--surface:#fff;--panel:#f4f4f1;--border:#e8e8e2;--border2:#d0d0c8;--muted:#9898a0;--body:#52525e;--heading:#1a1a22;--gold:#b8922a;--gold-lt:rgba(184,146,42,0.08);--gold-md:rgba(184,146,42,0.14);--gold-dk:#8a6418;--gold-btn:linear-gradient(135deg,#c9a84c,#a07830);--success:#1a8a52;--danger:#c94040;--ease:cubic-bezier(0.16,1,0.3,1)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min-height:100vh;overflow-x:hidden}
-
 /* NAV */
 .v-nav{height:60px;background:rgba(250,250,248,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:100;gap:12px}
 .v-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.v-logo-mark{width:32px;height:32px;border-radius:8px;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;font-family:'Playfair Display',serif;box-shadow:0 2px 8px rgba(184,146,42,0.3)}
 .v-logo-text{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--heading);letter-spacing:-0.03em}
 .nav-sep{color:var(--border2);font-size:18px}
 .nav-client{font-size:14px;font-weight:600;color:var(--heading)}
@@ -29,14 +20,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .nav-back{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px;padding:6px 12px;border:1px solid var(--border);border-radius:8px;transition:all 120ms var(--ease)}
 .nav-back:hover{color:var(--heading);border-color:var(--border2)}
 .nav-avatar{width:30px;height:30px;border-radius:50%;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;font-family:'Playfair Display',serif}
-
-/* APP */
+/* LAYOUT */
 .app{display:flex;height:calc(100vh - 60px)}
-
 /* GEN PANEL */
 .gen-panel{width:272px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:20px}
-
-/* PROFILE CARD */
 .profile-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:18px;position:relative;overflow:hidden}
 .profile-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-btn)}
 .profile-avatar{width:42px;height:42px;border-radius:50%;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:10px}
@@ -44,31 +31,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .profile-role{font-size:11px;color:var(--muted);margin-bottom:8px}
 .profile-focus{font-size:11px;color:var(--body);line-height:1.55;margin-bottom:10px}
 .profile-edit-btn{font-size:11px;font-weight:600;color:var(--gold);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0}
-.profile-edit-btn:hover{opacity:0.75}
-
 /* GEN FORM */
 .gen-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
 .gen-section{margin-bottom:16px}
 .gen-textarea{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;font-size:13px;color:var(--heading);font-family:'DM Sans',sans-serif;width:100%;min-height:78px;resize:vertical;outline:none;transition:border-color 150ms var(--ease);line-height:1.55}
 .gen-textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,146,42,0.1)}
 .gen-textarea::placeholder{color:var(--muted)}
-
-/* PILLAR CHIPS */
 .pillar-chips{display:flex;flex-wrap:wrap;gap:5px}
 .pillar-chip{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);cursor:pointer;background:var(--surface);color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 120ms var(--ease)}
 .pillar-chip:hover{border-color:var(--gold);color:var(--gold)}
 .pillar-chip.selected{border-color:var(--gold);background:var(--gold-lt);color:var(--gold)}
-
-/* SELECTS */
 .gen-select{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--heading);font-family:'DM Sans',sans-serif;width:100%;outline:none;cursor:pointer;transition:border-color 150ms var(--ease);appearance:none}
 .gen-select:focus{border-color:var(--gold)}
-
-/* LANG */
 .lang-row{display:flex;gap:6px}
 .lang-btn{flex:1;font-size:12px;font-weight:600;padding:7px;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;background:var(--surface);color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 120ms var(--ease);text-align:center}
 .lang-btn.active{border-color:var(--gold);background:var(--gold-lt);color:var(--gold)}
-
-/* GENERATE BTN */
 .btn-generate{width:100%;padding:12px;background:var(--gold-btn);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 150ms var(--ease);box-shadow:0 2px 12px rgba(184,146,42,0.3);position:relative;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px}
 .btn-generate:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(184,146,42,0.4)}
 .btn-generate:disabled{opacity:0.6;cursor:not-allowed;transform:none}
@@ -77,38 +54,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .btn-generate.loading .btn-label{opacity:0}
 .btn-generate.loading .spinner{display:block}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* PREVIEW */
 .gen-preview{display:none;background:var(--panel);border:1.5px solid var(--border);border-radius:12px;padding:14px}
 .gen-preview.show{display:block;animation:fadeUp .3s var(--ease) both}
 .gen-preview-text{font-size:12px;color:var(--body);line-height:1.7;white-space:pre-wrap;margin-bottom:12px;max-height:260px;overflow-y:auto}
 .gen-preview-actions{display:flex;gap:6px;flex-wrap:wrap}
-
-/* RIGHT PANEL */
+/* RIGHT */
 .right-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-/* MAIN TABS */
-.main-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 24px;background:var(--surface);flex-shrink:0}
-.main-tab{font-size:13px;font-weight:600;padding:15px 16px;border:none;background:none;font-family:'DM Sans',sans-serif;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 120ms var(--ease)}
+/* TABS — New order: Posts | News Scout | Topic Library | Positioning */
+.main-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 24px;background:var(--surface);flex-shrink:0;gap:2px}
+.main-tab{font-size:13px;font-weight:600;padding:15px 16px;border:none;background:none;font-family:'DM Sans',sans-serif;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 120ms var(--ease);display:flex;align-items:center;gap:6px;white-space:nowrap}
 .main-tab:hover{color:var(--heading)}
 .main-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-
-/* PANELS */
+.tab-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:20px;background:var(--gold-lt);color:var(--gold);border:1px solid rgba(184,146,42,0.2)}
 .main-panel{display:none;flex:1;overflow-y:auto;padding:28px}
 .main-panel.active{display:block;animation:fadeUp .3s var(--ease) both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-/* PANEL HEADER */
 .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .panel-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--heading)}
-
-/* FILTER TABS */
-.filter-tabs{display:flex;gap:4px;margin-bottom:18px}
+/* TOPIC LIBRARY — improved UX */
+.topic-workflow-hint{background:var(--gold-lt);border:1px solid rgba(184,146,42,0.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start}
+.twh-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.twh-text{font-size:12px;color:var(--body);line-height:1.6}
+.twh-text strong{color:var(--gold)}
+.filter-tabs{display:flex;gap:4px;margin-bottom:18px;flex-wrap:wrap}
 .filter-tab{font-size:12px;font-weight:600;padding:6px 14px;border:1.5px solid var(--border);border-radius:20px;cursor:pointer;background:none;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 120ms var(--ease)}
 .filter-tab:hover{color:var(--heading);border-color:var(--border2)}
 .filter-tab.active{background:var(--gold-lt);border-color:rgba(184,146,42,0.3);color:var(--gold)}
-
-/* POST CARDS */
 .posts-list{display:flex;flex-direction:column;gap:10px}
 .post-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:all 150ms var(--ease)}
 .post-card:hover{border-color:var(--border2);box-shadow:0 2px 10px rgba(0,0,0,0.05)}
@@ -116,16 +87,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .post-content{font-size:13px;color:var(--body);line-height:1.65;max-height:78px;overflow:hidden;white-space:pre-wrap;transition:max-height .3s var(--ease)}
 .post-content.expanded{max-height:600px}
 .post-card-actions{display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:8px}
-
-/* BADGES */
 .badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
 .b-draft{background:var(--panel);color:var(--muted);border:1px solid var(--border)}
 .b-review{background:rgba(184,146,42,0.1);color:var(--gold);border:1px solid rgba(184,146,42,0.2)}
 .b-approved{background:#edf7f2;color:var(--success);border:1px solid rgba(26,138,82,0.2)}
 .b-published{background:#d8f0e6;color:var(--success);border:1px solid rgba(26,138,82,0.3)}
 .b-pillar{background:var(--panel);color:var(--body);border:1px solid var(--border)}
-
-/* BUTTONS */
 .btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;transition:all 120ms var(--ease);text-decoration:none;display:inline-flex;align-items:center;gap:5px}
 .btn-primary{background:var(--gold-btn);color:#fff;box-shadow:0 1px 6px rgba(184,146,42,0.25)}
 .btn-primary:hover{opacity:0.9}
@@ -137,33 +104,31 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .btn-ghost:hover{color:var(--heading);background:var(--panel)}
 .btn-danger{background:#fdf2f2;color:var(--danger);border:1px solid rgba(201,64,64,0.2)}
 .btn-danger:hover{background:#fae4e4}
-
-/* EMPTY STATE */
 .empty-state{text-align:center;padding:56px 40px}
 .empty-icon{font-size:36px;margin-bottom:12px;opacity:0.35}
 .empty-state h3{font-family:'Playfair Display',serif;font-size:19px;color:var(--heading);margin-bottom:8px;font-weight:700}
 .empty-state p{font-size:13px;color:var(--muted)}
-
-/* TOPICS BOARD */
+/* KANBAN */
 .topics-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .topics-col{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .topics-col-header{display:flex;align-items:center;gap:7px;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);border-bottom:1px solid var(--border);background:var(--panel)}
 .topics-col-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .topics-col-count{margin-left:auto;background:var(--border);border-radius:20px;padding:1px 7px;font-size:10px;color:var(--muted)}
 .topics-col-body{padding:8px;display:flex;flex-direction:column;gap:6px;min-height:80px}
-.topic-card{background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:11px;cursor:pointer;transition:all 150ms var(--ease)}
+.topic-card{background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:11px;cursor:pointer;transition:all 150ms var(--ease);position:relative}
 .topic-card:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,0.06)}
-.topic-card-title{font-size:12px;font-weight:600;color:var(--heading);margin-bottom:6px;line-height:1.4}
+/* Highlight on hover to emphasize clickability */
+.topic-card:hover .topic-card-title{color:var(--gold)}
+.topic-card-title{font-size:12px;font-weight:600;color:var(--heading);margin-bottom:6px;line-height:1.4;transition:color 120ms}
 .topic-card-meta{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .topic-date{font-size:10px;color:var(--muted)}
 .priority-high{color:var(--danger);font-size:10px;font-weight:700}
-
-/* TRACK FILTER */
+/* Generate-from-topic button — prominent */
+.topic-generate-btn{width:100%;margin-top:8px;padding:6px;background:var(--gold-btn);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 120ms var(--ease);display:flex;align-items:center;justify-content:center;gap:5px}
+.topic-generate-btn:hover{opacity:0.9}
 .track-filter-bar{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
 .track-filter-btn{font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);cursor:pointer;background:var(--surface);color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 120ms var(--ease)}
 .track-filter-btn.active{border-color:rgba(184,146,42,0.3);background:var(--gold-lt);color:var(--gold)}
-
-/* TRACKS GRID */
 .tracks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .track-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all 200ms var(--ease)}
 .track-card:hover{border-color:var(--border2);box-shadow:0 4px 14px rgba(0,0,0,0.07);transform:translateY(-2px)}
@@ -174,8 +139,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .track-keywords{display:flex;flex-wrap:wrap;gap:4px}
 .track-kw{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--panel);color:var(--body);border:1px solid var(--border)}
 .track-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--border)}
-
-/* NEWS */
 .news-list{display:flex;flex-direction:column;gap:8px}
 .news-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all 150ms var(--ease)}
 .news-card:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,0.05)}
@@ -186,8 +149,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .news-date{font-size:11px;color:var(--muted)}
 .news-kw{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--gold-lt);color:var(--gold);border:1px solid rgba(184,146,42,0.2)}
 .news-actions{display:flex;gap:7px}
-
-/* FORM */
 .form-group{display:flex;flex-direction:column;gap:5px}
 .form-label{font-size:12px;font-weight:600;color:var(--body)}
 .form-hint{font-size:11px;color:var(--muted)}
@@ -196,8 +157,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .v-input::placeholder,.v-textarea::placeholder{color:var(--muted)}
 .v-textarea{min-height:80px;resize:vertical}
 .v-select{cursor:pointer;appearance:none}
-
-/* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(26,26,34,0.45);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:500px;box-shadow:0 24px 60px rgba(0,0,0,0.15);animation:mIn .25s var(--ease) both;max-height:90vh;overflow-y:auto}
@@ -206,8 +165,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .modal-header h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--heading)}
 .modal-body{padding:24px;display:flex;flex-direction:column;gap:16px}
 .modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
-
-/* TOAST */
 .toast-wrap{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:999}
 .toast{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px 16px;font-size:13px;font-weight:500;color:var(--heading);box-shadow:0 8px 24px rgba(0,0,0,0.1);max-width:300px;opacity:0;transform:translateY(6px);transition:all .25s var(--ease)}
 .toast.show{opacity:1;transform:none}
@@ -216,9 +173,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 </style>
 </head>
 <body>
-
 <nav class="v-nav">
-  <a href="dashboard.html" class="v-logo"><div class="v-logo-mark">V</div><span class="v-logo-text">Voicely</span></a>
+  <a href="dashboard.html" class="v-logo">
+    <svg width="30" height="30" viewBox="0 0 56 56" fill="none"><rect width="56" height="56" rx="9" fill="url(#lg3)"/><defs><linearGradient id="lg3" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#c9a84c"/><stop offset="100%" stop-color="#8a6418"/></linearGradient></defs><rect x="13" y="22" width="5" height="12" rx="2.5" fill="rgba(255,255,255,0.5)"/><rect x="21" y="16" width="5" height="24" rx="2.5" fill="rgba(255,255,255,0.75)"/><rect x="29" y="12" width="5" height="32" rx="2.5" fill="#fff"/><rect x="37" y="18" width="5" height="20" rx="2.5" fill="rgba(255,255,255,0.75)"/></svg>
+    <span class="v-logo-text">Voicely</span>
+  </a>
   <span class="nav-sep">/</span>
   <span class="nav-client" id="nav-client-name">Loading...</span>
   <div class="nav-end">
@@ -226,9 +185,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
     <div class="nav-avatar" id="nav-avatar">?</div>
   </div>
 </nav>
-
 <div class="app">
-  <!-- GENERATOR -->
   <aside class="gen-panel">
     <div class="profile-card">
       <div class="profile-avatar" id="profile-avatar">?</div>
@@ -237,71 +194,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
       <div class="profile-focus" id="profile-focus"></div>
       <button class="profile-edit-btn" onclick="openEditModal()">✎ Edit profile</button>
     </div>
-
-    <div class="gen-section">
-      <span class="gen-label">Topic / Angle</span>
-      <textarea class="gen-textarea" id="gen-topic" placeholder="e.g. Why food retail is the most defensive asset class in Europe right now"></textarea>
-    </div>
-    <div class="gen-section">
-      <span class="gen-label">Content Pillar</span>
-      <div class="pillar-chips">
-        <div class="pillar-chip" data-pillar="Market Insight" onclick="selectPillar(this)">📊 Market</div>
-        <div class="pillar-chip" data-pillar="Deal Anatomy" onclick="selectPillar(this)">🏗 Deal</div>
-        <div class="pillar-chip" data-pillar="AI & Tools" onclick="selectPillar(this)">⚡ AI</div>
-        <div class="pillar-chip" data-pillar="Strong Opinion" onclick="selectPillar(this)">🎯 Opinion</div>
-        <div class="pillar-chip" data-pillar="Process" onclick="selectPillar(this)">🔄 Process</div>
-      </div>
-    </div>
-    <div class="gen-section">
-      <span class="gen-label">Tone</span>
-      <select class="gen-select" id="gen-tone">
-        <option value="sharp">Sharp & Direct</option>
-        <option value="educator">Educator</option>
-        <option value="insider">Insider</option>
-        <option value="contrarian">Contrarian</option>
-        <option value="storyteller">Storyteller</option>
-      </select>
-    </div>
-    <div class="gen-section">
-      <span class="gen-label">Format</span>
-      <select class="gen-select" id="gen-format">
-        <option value="hook-list">Strong hook + numbered list</option>
-        <option value="hook-story">Hook + short story</option>
-        <option value="take">Hot take + argument</option>
-        <option value="question">Question opener + insight</option>
-        <option value="data">Data point + analysis</option>
-      </select>
-    </div>
-    <div class="gen-section">
-      <span class="gen-label">Language</span>
-      <div class="lang-row">
-        <button class="lang-btn active" data-lang="en" onclick="selectLang(this)">🇬🇧 English</button>
-        <button class="lang-btn" data-lang="de" onclick="selectLang(this)">🇩🇪 Deutsch</button>
-      </div>
-    </div>
-
-    <button class="btn-generate" id="gen-btn" onclick="generatePost()">
-      <span class="btn-label">⚡ Generate post</span>
-      <div class="spinner"></div>
-    </button>
-
+    <div class="gen-section"><span class="gen-label">Topic / Angle</span><textarea class="gen-textarea" id="gen-topic" placeholder="e.g. Why food retail is the most defensive asset class in Europe right now"></textarea></div>
+    <div class="gen-section"><span class="gen-label">Content Pillar</span><div class="pillar-chips"><div class="pillar-chip" data-pillar="Market Insight" onclick="selectPillar(this)">📊 Market</div><div class="pillar-chip" data-pillar="Deal Anatomy" onclick="selectPillar(this)">🏗 Deal</div><div class="pillar-chip" data-pillar="AI & Tools" onclick="selectPillar(this)">⚡ AI</div><div class="pillar-chip" data-pillar="Strong Opinion" onclick="selectPillar(this)">🎯 Opinion</div><div class="pillar-chip" data-pillar="Process" onclick="selectPillar(this)">🔄 Process</div></div></div>
+    <div class="gen-section"><span class="gen-label">Tone</span><select class="gen-select" id="gen-tone"><option value="sharp">Sharp & Direct</option><option value="educator">Educator</option><option value="insider">Insider</option><option value="contrarian">Contrarian</option><option value="storyteller">Storyteller</option></select></div>
+    <div class="gen-section"><span class="gen-label">Format</span><select class="gen-select" id="gen-format"><option value="hook-list">Strong hook + numbered list</option><option value="hook-story">Hook + short story</option><option value="take">Hot take + argument</option><option value="question">Question opener + insight</option><option value="data">Data point + analysis</option></select></div>
+    <div class="gen-section"><span class="gen-label">Language</span><div class="lang-row"><button class="lang-btn active" data-lang="en" onclick="selectLang(this)">🇬🇧 English</button><button class="lang-btn" data-lang="de" onclick="selectLang(this)">🇩🇪 Deutsch</button></div></div>
+    <button class="btn-generate" id="gen-btn" onclick="generatePost()"><span class="btn-label">⚡ Generate post</span><div class="spinner"></div></button>
     <div class="gen-preview" id="gen-preview">
       <div class="gen-preview-text" id="gen-preview-text"></div>
-      <div class="gen-preview-actions">
-        <button class="btn btn-primary" onclick="savePost('draft')">Save draft</button>
-        <button class="btn btn-success" onclick="savePost('review')">Send for review</button>
-        <button class="btn btn-ghost" onclick="generatePost()">↺ Retry</button>
-      </div>
+      <div class="gen-preview-actions"><button class="btn btn-primary" onclick="savePost('draft')">Save draft</button><button class="btn btn-success" onclick="savePost('review')">Send for review</button><button class="btn btn-ghost" onclick="generatePost()">↺ Retry</button></div>
     </div>
   </aside>
-
-  <!-- RIGHT -->
   <div class="right-panel">
+    <!-- NEW TAB ORDER: Posts | News Scout | Topic Library | Positioning -->
     <div class="main-tabs">
       <button class="main-tab active" onclick="switchMainTab('posts',this)">✍️ Posts</button>
-      <button class="main-tab" onclick="switchMainTab('topics',this)">📋 Topic Library</button>
-      <button class="main-tab" onclick="switchMainTab('tracks',this)">🎯 Positioning</button>
       <button class="main-tab" onclick="switchMainTab('news',this)">📰 News Scout</button>
+      <button class="main-tab" id="tab-topics" onclick="switchMainTab('topics',this)">📋 Topic Library</button>
+      <button class="main-tab" onclick="switchMainTab('tracks',this)">🎯 Positioning</button>
     </div>
 
     <!-- POSTS -->
@@ -313,14 +223,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
         <button class="filter-tab" onclick="filterPosts('review',this)">In Review</button>
         <button class="filter-tab" onclick="filterPosts('approved',this)">Approved</button>
       </div>
-      <div class="posts-list" id="posts-list">
-        <div class="empty-state"><div class="empty-icon">✍️</div><h3>No posts yet</h3><p>Use the generator to create your first post.</p></div>
-      </div>
+      <div class="posts-list" id="posts-list"><div class="empty-state"><div class="empty-icon">✍️</div><h3>No posts yet</h3><p>Use the generator on the left to create your first post.</p></div></div>
     </div>
 
-    <!-- TOPICS -->
+    <!-- NEWS SCOUT — moved to position 2 -->
+    <div class="main-panel" id="panel-news">
+      <div class="panel-header">
+        <h2 class="panel-title">News Scout</h2>
+        <div style="display:flex;gap:8px;align-items:center"><span style="font-size:12px;color:var(--muted)">Updated every 30 min</span><button class="btn btn-ghost" onclick="loadNews()">↺ Refresh</button></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px;max-width:520px;line-height:1.65">Articles auto-scanned based on your positioning track keywords. Click <strong style="color:var(--gold)">"Write post from this"</strong> to load directly into the generator.</p>
+      <div class="track-filter-bar" id="news-track-filter"><button class="track-filter-btn active" data-track="all" onclick="filterNews('all',this)">All tracks</button></div>
+      <div id="news-list"><div class="empty-state"><div class="empty-icon">📰</div><h3>Loading news...</h3></div></div>
+    </div>
+
+    <!-- TOPIC LIBRARY — improved UX -->
     <div class="main-panel" id="panel-topics">
       <div class="panel-header"><h2 class="panel-title">Topic Library</h2><button class="btn btn-primary" onclick="openTopicModal()">+ Add topic</button></div>
+      <!-- Workflow hint — explains the logic clearly -->
+      <div class="topic-workflow-hint">
+        <div class="twh-icon">💡</div>
+        <div class="twh-text">
+          <strong>How to use:</strong> Plan topics in advance (Open) → mark active ones In Progress → click <strong>⚡ Generate</strong> on any card to load it directly into the AI generator. Move to Used after publishing.
+        </div>
+      </div>
       <div class="track-filter-bar" id="track-filter-bar"><button class="track-filter-btn active" data-track="all" onclick="filterTopics('all',this)">All tracks</button></div>
       <div class="topics-board">
         <div class="topics-col">
@@ -341,42 +267,27 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
     <!-- POSITIONING -->
     <div class="main-panel" id="panel-tracks">
       <div class="panel-header"><h2 class="panel-title">Positioning Tracks</h2><button class="btn btn-primary" onclick="openTrackModal()">+ Add track</button></div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;max-width:520px;line-height:1.65">Define the different identities this client wants to build on LinkedIn. Each track has keywords — the News Scout uses these to surface relevant articles.</p>
-      <div class="tracks-grid" id="tracks-grid">
-        <div class="empty-state"><div class="empty-icon">🎯</div><h3>No tracks yet</h3><p>Add a positioning track to define how this client wants to be perceived.</p></div>
-      </div>
-    </div>
-
-    <!-- NEWS -->
-    <div class="main-panel" id="panel-news">
-      <div class="panel-header">
-        <h2 class="panel-title">News Scout</h2>
-        <div style="display:flex;gap:8px;align-items:center"><span style="font-size:12px;color:var(--muted)">Updated every 30 min</span><button class="btn btn-ghost" onclick="loadNews()">↺ Refresh</button></div>
-      </div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:18px;max-width:520px;line-height:1.65">Articles found by the News Scanner based on your positioning track keywords.</p>
-      <div class="track-filter-bar" id="news-track-filter"><button class="track-filter-btn active" data-track="all" onclick="filterNews(&quot;all&quot;,this)">All tracks</button></div>
-      <div id="news-list"><div class="empty-state"><div class="empty-icon">📰</div><h3>Loading news...</h3></div></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:24px;max-width:520px;line-height:1.65">Define the identities this client wants to build on LinkedIn. Keywords feed directly into News Scout for auto-discovery of relevant articles.</p>
+      <div class="tracks-grid" id="tracks-grid"><div class="empty-state"><div class="empty-icon">🎯</div><h3>No tracks yet</h3><p>Add a positioning track to define how this client wants to be perceived.</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- EDIT MODAL -->
+<!-- MODALS -->
 <div class="overlay" id="edit-modal">
   <div class="modal">
     <div class="modal-header"><h3>Edit client profile</h3><button class="btn btn-ghost" onclick="closeEditModal()" style="padding:5px 10px">✕</button></div>
     <div class="modal-body">
-      <div class="form-group"><label class="form-label">Name *</label><input class="v-input" id="e-name" placeholder="Client name"></div>
-      <div class="form-group"><label class="form-label">Role / Title</label><input class="v-input" id="e-role" placeholder="e.g. Head of Marketing"></div>
-      <div class="form-group"><label class="form-label">Industry / Focus</label><input class="v-input" id="e-focus" placeholder="e.g. Real Estate, B2B SaaS"></div>
-      <div class="form-group"><label class="form-label">Target audience</label><input class="v-input" id="e-audience" placeholder="e.g. CFOs, Investors"></div>
+      <div class="form-group"><label class="form-label">Name *</label><input class="v-input" id="e-name"></div>
+      <div class="form-group"><label class="form-label">Role / Title</label><input class="v-input" id="e-role"></div>
+      <div class="form-group"><label class="form-label">Industry / Focus</label><input class="v-input" id="e-focus"></div>
+      <div class="form-group"><label class="form-label">Target audience</label><input class="v-input" id="e-audience"></div>
       <div class="form-group"><label class="form-label">Unique angle</label><textarea class="v-textarea" id="e-differentiator" placeholder="What makes this person's voice unique?"></textarea></div>
-      <div class="form-group"><label class="form-label">Never mention</label><input class="v-input" id="e-avoid" placeholder="e.g. competitor names"></div>
+      <div class="form-group"><label class="form-label">Never mention</label><input class="v-input" id="e-avoid"></div>
     </div>
     <div class="modal-footer"><button class="btn btn-ghost" onclick="closeEditModal()">Cancel</button><button class="btn btn-primary" onclick="saveClientProfile()">Save changes →</button></div>
   </div>
 </div>
-
-<!-- TOPIC MODAL -->
 <div class="overlay" id="topic-modal">
   <div class="modal">
     <div class="modal-header"><h3>Add topic</h3><button class="btn btn-ghost" onclick="closeTopicModal()" style="padding:5px 10px">✕</button></div>
@@ -386,30 +297,27 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
       <div class="form-group"><label class="form-label">Content pillar</label><select class="v-select" id="t-pillar"><option value="">— Select —</option><option>Market Insight</option><option>Deal Anatomy</option><option>AI & Tools</option><option>Strong Opinion</option><option>Process</option></select></div>
       <div class="form-group"><label class="form-label">Priority</label><select class="v-select" id="t-priority"><option value="normal">Normal</option><option value="high">High</option><option value="low">Low</option></select></div>
       <div class="form-group"><label class="form-label">Planned for</label><input class="v-input" type="date" id="t-date"></div>
-      <div class="form-group"><label class="form-label">Notes</label><textarea class="v-textarea" id="t-notes" placeholder="Angle, sources, key arguments..."></textarea></div>
+      <div class="form-group"><label class="form-label">Notes / Angle</label><textarea class="v-textarea" id="t-notes" placeholder="Key arguments, sources, angle..."></textarea></div>
     </div>
     <div class="modal-footer"><button class="btn btn-ghost" onclick="closeTopicModal()">Cancel</button><button class="btn btn-primary" onclick="saveTopic()">Save topic →</button></div>
   </div>
 </div>
-
-<!-- TRACK MODAL -->
 <div class="overlay" id="track-modal">
   <div class="modal">
     <div class="modal-header"><h3>New positioning track</h3><button class="btn btn-ghost" onclick="closeTrackModal()" style="padding:5px 10px">✕</button></div>
     <div class="modal-body">
       <div class="form-group"><label class="form-label">Track name *</label><input class="v-input" id="tr-name" placeholder="e.g. Real Estate Expert"></div>
       <div class="form-group"><label class="form-label">Description</label><input class="v-input" id="tr-desc" placeholder="How should the audience perceive this person?"></div>
-      <div class="form-group"><label class="form-label">Keywords for News Scout</label><textarea class="v-textarea" id="tr-keywords" placeholder="One keyword per line e.g.&#10;Büromarkt&#10;Einzelhandel&#10;REPE" style="min-height:100px"></textarea><span class="form-hint">Used to find relevant news articles automatically.</span></div>
+      <div class="form-group"><label class="form-label">Keywords for News Scout</label><textarea class="v-textarea" id="tr-keywords" placeholder="One keyword per line&#10;e.g. Einzelhandel&#10;Food Retail&#10;REPE" style="min-height:100px"></textarea><span class="form-hint">Used to auto-scan news articles every 30 minutes.</span></div>
       <div class="form-group"><label class="form-label">Accent color</label><input type="color" id="tr-color" value="#b8922a" style="height:36px;width:60px;border:1.5px solid var(--border);border-radius:6px;cursor:pointer"></div>
     </div>
     <div class="modal-footer"><button class="btn btn-ghost" onclick="closeTrackModal()">Cancel</button><button class="btn btn-primary" onclick="saveTrack()">Create track →</button></div>
   </div>
 </div>
-
 <div class="toast-wrap" id="toasts"></div>
 
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+import{createClient}from'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 const sb=createClient('https://petnnkxvudxvtfjuzsdj.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBldG5ua3h2dWR4dnRmanV6c2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMTM2MTIsImV4cCI6MjA4ODc4OTYxMn0.wtP9hZj2i5qca_Ub2hotCJUlRbL7MLT4jNrKisSPA8A')
 const{data:{session}}=await sb.auth.getSession()
 if(!session){window.location.href='voicely-login.html'}
@@ -438,12 +346,12 @@ function renderPosts(){
   const filtered=currentFilter==='all'?allPosts:allPosts.filter(p=>p.status===currentFilter)
   document.getElementById('posts-count').textContent=`${filtered.length} post${filtered.length!==1?'s':''}`
   const el=document.getElementById('posts-list')
-  if(!filtered.length){el.innerHTML=`<div class="empty-state"><div class="empty-icon">✍️</div><h3>No posts here</h3><p>${currentFilter==='all'?'Use the generator to create your first post.':`No ${currentFilter} posts yet.`}</p></div>`;return}
+  if(!filtered.length){el.innerHTML=`<div class="empty-state"><div class="empty-icon">✍️</div><h3>No posts here</h3><p>${currentFilter==='all'?'Use the generator on the left to create your first post.':`No ${currentFilter} posts yet.`}</p></div>`;return}
   const sm={draft:'b-draft',review:'b-review',approved:'b-approved',published:'b-published'}
   const sl={draft:'Draft',review:'In Review',approved:'✓ Approved',published:'Published'}
   el.innerHTML=filtered.map(p=>{
     const date=new Date(p.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})
-    return `<div class="post-card" id="post-${p.id}">
+    return`<div class="post-card" id="post-${p.id}">
       <div class="post-card-meta"><span class="badge ${sm[p.status]||'b-draft'}">${sl[p.status]||p.status}</span>${p.pillar?`<span class="badge b-pillar">${p.pillar}</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--muted)">${date}</span></div>
       <div class="post-content" id="content-${p.id}">${escHtml(p.content)}</div>
       <div class="post-card-actions">
@@ -492,8 +400,7 @@ Return ONLY the post text.`
 }
 window.savePost=async(status)=>{
   if(!lastGenerated)return
-  const{error}=await sb.from('posts').insert({client_id:clientId,agency_id:agencyId,created_by:user.id,content:lastGenerated,pillar:selectedPillar||null,topic:document.getElementById('gen-topic').value.trim(),status})
-  if(error){toast('Error saving post','error');return}
+  await sb.from('posts').insert({client_id:clientId,agency_id:agencyId,created_by:user.id,content:lastGenerated,pillar:selectedPillar||null,topic:document.getElementById('gen-topic').value.trim(),status})
   document.getElementById('gen-preview').classList.remove('show')
   document.getElementById('gen-topic').value='';lastGenerated=''
   toast(status==='review'?'Sent for review!':'Draft saved!','success');await loadPosts()
@@ -503,15 +410,7 @@ window.deletePost=async(id)=>{if(!confirm('Delete this post?'))return;await sb.f
 window.copyPost=(id)=>{const p=allPosts.find(p=>p.id===id);if(!p)return;navigator.clipboard.writeText(p.content);toast('Copied!','success')}
 window.toggleExpand=(id)=>document.getElementById(`content-${id}`).classList.toggle('expanded')
 window.filterPosts=(f,btn)=>{currentFilter=f;document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderPosts()}
-window.openEditModal=()=>{
-  document.getElementById('e-name').value=client.name||''
-  document.getElementById('e-role').value=client.role_title||''
-  document.getElementById('e-focus').value=client.focus||''
-  document.getElementById('e-audience').value=client.audience||''
-  document.getElementById('e-differentiator').value=client.differentiator||''
-  document.getElementById('e-avoid').value=client.avoid||''
-  document.getElementById('edit-modal').classList.add('open')
-}
+window.openEditModal=()=>{document.getElementById('e-name').value=client.name||'';document.getElementById('e-role').value=client.role_title||'';document.getElementById('e-focus').value=client.focus||'';document.getElementById('e-audience').value=client.audience||'';document.getElementById('e-differentiator').value=client.differentiator||'';document.getElementById('e-avoid').value=client.avoid||'';document.getElementById('edit-modal').classList.add('open')}
 window.closeEditModal=()=>document.getElementById('edit-modal').classList.remove('open')
 window.saveClientProfile=async()=>{
   const name=document.getElementById('e-name').value.trim();if(!name){toast('Name required','error');return}
@@ -525,20 +424,27 @@ window.switchMainTab=(tab,btn)=>{document.querySelectorAll('.main-tab').forEach(
 let allTracks=[]
 async function loadTracks(){
   const{data}=await sb.from('positioning_tracks').select('*').eq('client_id',clientId).order('created_at')
-  allTracks=data||[];renderTracks();updateTrackFilter();updateTrackSelect()
+  allTracks=data||[];renderTracks();updateTrackFilter();updateTrackSelect();updateNewsTrackFilter()
+  // Update topic library tab badge
+  if(allTracks.length){const tb=document.getElementById('tab-topics');if(!tb.querySelector('.tab-badge'))tb.innerHTML='📋 Topic Library'}
 }
 function renderTracks(){
   const el=document.getElementById('tracks-grid')
-  if(!allTracks.length){el.innerHTML=`<div class="empty-state"><div class="empty-icon">🎯</div><h3>No tracks yet</h3><p>Add a positioning track to define how this client wants to be perceived.</p></div>`;return}
+  if(!allTracks.length){el.innerHTML=`<div class="empty-state"><div class="empty-icon">🎯</div><h3>No tracks yet</h3><p>Add a positioning track — keywords feed directly into News Scout.</p></div>`;return}
   el.innerHTML=allTracks.map(t=>{
     const kws=(t.keywords||[]).slice(0,5)
-    return `<div class="track-card"><div class="track-bar" style="background:${t.color||'#b8922a'}"></div><div class="track-body"><div class="track-name">${t.name}</div><div class="track-desc">${t.description||'No description'}</div><div class="track-keywords">${kws.map(k=>`<span class="track-kw">${k}</span>`).join('')}${(t.keywords||[]).length>5?`<span class="track-kw">+${(t.keywords||[]).length-5}</span>`:''}</div></div><div class="track-footer"><span style="font-size:11px;color:var(--muted)">${(t.keywords||[]).length} keywords</span><button class="btn btn-danger" style="font-size:11px;padding:4px 10px" onclick="deleteTrack('${t.id}')">Delete</button></div></div>`
+    return`<div class="track-card"><div class="track-bar" style="background:${t.color||'#b8922a'}"></div><div class="track-body"><div class="track-name">${t.name}</div><div class="track-desc">${t.description||'No description'}</div><div class="track-keywords">${kws.map(k=>`<span class="track-kw">${k}</span>`).join('')}${(t.keywords||[]).length>5?`<span class="track-kw">+${(t.keywords||[]).length-5}</span>`:''}</div></div><div class="track-footer"><span style="font-size:11px;color:var(--muted)">${(t.keywords||[]).length} keywords</span><button class="btn btn-danger" style="font-size:11px;padding:4px 10px" onclick="deleteTrack('${t.id}')">Delete</button></div></div>`
   }).join('')
 }
 function updateTrackFilter(){
   const bar=document.getElementById('track-filter-bar')
   bar.querySelectorAll('[data-track]:not([data-track="all"])').forEach(e=>e.remove())
   allTracks.forEach(t=>{const btn=document.createElement('button');btn.className='track-filter-btn';btn.dataset.track=t.id;btn.textContent=t.name;btn.onclick=()=>filterTopics(t.id,btn);bar.appendChild(btn)})
+}
+function updateNewsTrackFilter(){
+  const bar=document.getElementById('news-track-filter')
+  bar.querySelectorAll('[data-track]:not([data-track="all"])').forEach(e=>e.remove())
+  allTracks.forEach(t=>{const btn=document.createElement('button');btn.className='track-filter-btn';btn.dataset.track=t.id;btn.textContent=t.name;btn.onclick=()=>filterNews(t.id,btn);bar.appendChild(btn)})
 }
 function updateTrackSelect(){
   const sel=document.getElementById('t-track');if(!sel)return
@@ -573,23 +479,25 @@ function renderTopicCol(colId,topics){
   el.innerHTML=topics.map(t=>{
     const tr=allTracks.find(x=>x.id===t.track_id)
     const dateStr=t.planned_for?new Date(t.planned_for).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):''
-    return `<div class="topic-card" onclick="openTopicDetail('${t.id}')">
+    return`<div class="topic-card">
       <div class="topic-card-title">${t.title}</div>
       <div class="topic-card-meta">
         ${tr?`<span style="font-size:10px;font-weight:700;color:${tr.color||'#b8922a'};background:${tr.color||'#b8922a'}18;padding:2px 7px;border-radius:20px">${tr.name}</span>`:''}
         ${t.pillar?`<span class="badge b-pillar" style="font-size:9px">${t.pillar}</span>`:''}
-        ${t.priority==='high'?'<span class="priority-high">↑ High</span>':''}
+        ${t.priority==='high'?'<span class="priority-high">↑</span>':''}
         ${dateStr?`<span class="topic-date">📅 ${dateStr}</span>`:''}
       </div>
-      <div style="display:flex;gap:5px;margin-top:8px">
-        ${t.status!=='in_progress'?`<button class="btn btn-ghost" style="font-size:10px;padding:3px 8px" onclick="event.stopPropagation();updateTopicStatus('${t.id}','in_progress')">→ Progress</button>`:''}
-        ${t.status!=='used'?`<button class="btn btn-success" style="font-size:10px;padding:3px 8px" onclick="event.stopPropagation();updateTopicStatus('${t.id}','used')">✓ Used</button>`:''}
-        <button class="btn btn-danger" style="font-size:10px;padding:3px 8px;margin-left:auto" onclick="event.stopPropagation();deleteTopic('${t.id}')">✕</button>
+      <!-- Generate button — the primary action -->
+      <button class="topic-generate-btn" onclick="generateFromTopic('${t.id}')">⚡ Generate post</button>
+      <div style="display:flex;gap:5px;margin-top:6px">
+        ${t.status!=='in_progress'?`<button class="btn btn-ghost" style="font-size:10px;padding:3px 8px;flex:1" onclick="updateTopicStatus('${t.id}','in_progress')">→ Progress</button>`:''}
+        ${t.status!=='used'?`<button class="btn btn-success" style="font-size:10px;padding:3px 8px;flex:1" onclick="updateTopicStatus('${t.id}','used')">✓ Used</button>`:''}
+        <button class="btn btn-danger" style="font-size:10px;padding:3px 8px" onclick="deleteTopic('${t.id}')">✕</button>
       </div>
     </div>`
   }).join('')
 }
-window.filterTopics=(id,btn)=>{currentTrackFilter=id;document.querySelectorAll('.track-filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTopics()}
+window.filterTopics=(id,btn)=>{currentTrackFilter=id;document.querySelectorAll('#track-filter-bar .track-filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTopics()}
 window.openTopicModal=()=>{updateTrackSelect();document.getElementById('topic-modal').classList.add('open')}
 window.closeTopicModal=()=>document.getElementById('topic-modal').classList.remove('open')
 window.saveTopic=async()=>{
@@ -601,17 +509,24 @@ window.saveTopic=async()=>{
 }
 window.updateTopicStatus=async(id,status)=>{await sb.from('topics').update({status}).eq('id',id);await loadTopics()}
 window.deleteTopic=async(id)=>{if(!confirm('Delete topic?'))return;await sb.from('topics').delete().eq('id',id);toast('Deleted');await loadTopics()}
-window.openTopicDetail=(id)=>{const t=allTopics.find(x=>x.id===id);if(!t)return;document.getElementById('gen-topic').value=t.title;switchMainTab('posts',document.querySelector('.main-tab'));toast('Topic loaded into generator ↑','success')}
+// Key UX improvement: generate button on topic card switches to Posts tab AND loads topic
+window.generateFromTopic=(id)=>{
+  const t=allTopics.find(x=>x.id===id);if(!t)return
+  document.getElementById('gen-topic').value=t.title
+  if(t.pillar){document.querySelectorAll('.pillar-chip').forEach(c=>{if(c.dataset.pillar===t.pillar){c.classList.add('selected');selectedPillar=t.pillar}})}
+  // Switch to Posts tab so user sees the generator context
+  const postsTab=document.querySelector('.main-tab')
+  switchMainTab('posts',postsTab)
+  toast('Topic loaded — click ⚡ Generate ↙','success')
+  // Auto-mark as in_progress if still open
+  if(t.status==='open')updateTopicStatus(id,'in_progress')
+}
 document.getElementById('topic-modal').addEventListener('click',e=>{if(e.target===document.getElementById('topic-modal'))closeTopicModal()})
 let allNews=[],currentNewsTrack='all'
 window.loadNews=async function(){
   const el=document.getElementById('news-list');el.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-size:13px">Loading...</div>'
   const{data}=await sb.from('news_items').select('*').eq('client_id',clientId).order('published_at',{ascending:false}).limit(100)
-  allNews=data||[];await loadTracks()
-  const filterBar=document.getElementById('news-track-filter')
-  filterBar.innerHTML='<button class="track-filter-btn active" data-track="all" onclick="filterNews(&quot;all&quot;,this)">All tracks</button>'
-  allTracks.forEach(t=>{const btn=document.createElement('button');btn.className='track-filter-btn';btn.dataset.track=t.id;btn.textContent=t.name;btn.onclick=()=>filterNews(t.id,btn);filterBar.appendChild(btn)})
-  renderNews()
+  allNews=data||[];await loadTracks();renderNews()
 }
 function renderNews(){
   const filtered=currentNewsTrack==='all'?allNews:allNews.filter(n=>n.track_id===currentNewsTrack)
@@ -620,7 +535,7 @@ function renderNews(){
   el.innerHTML=filtered.map(n=>{
     const tr=allTracks.find(t=>t.id===n.track_id)
     const date=n.published_at?new Date(n.published_at).toLocaleDateString('de-DE',{day:'numeric',month:'short',year:'numeric'}):''
-    return `<div class="news-card">
+    return`<div class="news-card">
       <a class="news-headline" href="${n.url}" target="_blank" rel="noopener">${n.headline}</a>
       <div class="news-meta">
         ${n.source?`<span class="news-source">📰 ${n.source}</span>`:''}
@@ -629,14 +544,20 @@ function renderNews(){
         ${tr?`<span style="font-size:10px;font-weight:700;color:${tr.color||'#b8922a'};background:${tr.color||'#b8922a'}18;padding:2px 8px;border-radius:20px">${tr.name}</span>`:''}
       </div>
       <div class="news-actions">
-        <button class="btn btn-primary" style="font-size:11px;padding:5px 12px" onclick="useNews('${n.id}')">✍️ Write post from this</button>
+        <button class="btn btn-primary" style="font-size:11px;padding:5px 12px" onclick="useNews('${n.id}')">⚡ Write post from this</button>
         <a href="${n.url}" target="_blank" class="btn btn-ghost" style="font-size:11px;padding:5px 12px">Read →</a>
       </div>
     </div>`
   }).join('')
 }
 window.filterNews=(id,btn)=>{currentNewsTrack=id;document.querySelectorAll('#news-track-filter .track-filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderNews()}
-window.useNews=(id)=>{const n=allNews.find(x=>x.id===id);if(!n)return;document.getElementById('gen-topic').value=n.headline;switchMainTab('posts',document.querySelector('.main-tab'));toast('Article loaded into generator ↑','success')}
+window.useNews=(id)=>{
+  const n=allNews.find(x=>x.id===id);if(!n)return
+  document.getElementById('gen-topic').value=n.headline
+  const postsTab=document.querySelector('.main-tab')
+  switchMainTab('posts',postsTab)
+  toast('Article loaded — click ⚡ Generate ↙','success')
+}
 </script>
 </body>
 </html>

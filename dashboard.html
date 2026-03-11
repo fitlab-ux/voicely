@@ -1,27 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Voicely — Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#fafaf8;--surface:#fff;--panel:#f4f4f1;--border:#e8e8e2;--border2:#d0d0c8;
-  --muted:#9898a0;--body:#52525e;--heading:#1a1a22;
-  --gold:#b8922a;--gold-lt:rgba(184,146,42,0.08);--gold-md:rgba(184,146,42,0.14);
-  --gold-dk:#8a6a18;--gold-btn:linear-gradient(135deg,#c9a84c,#a07830);
-  --success:#1a8a52;--danger:#c94040;--ease:cubic-bezier(0.16,1,0.3,1)
-}
+:root{--bg:#fafaf8;--surface:#fff;--panel:#f4f4f1;--border:#e8e8e2;--border2:#d0d0c8;--muted:#9898a0;--body:#52525e;--heading:#1a1a22;--gold:#b8922a;--gold-lt:rgba(184,146,42,0.08);--gold-md:rgba(184,146,42,0.14);--gold-dk:#8a6418;--gold-btn:linear-gradient(135deg,#c9a84c,#a07830);--success:#1a8a52;--danger:#c94040;--ease:cubic-bezier(0.16,1,0.3,1)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min-height:100vh}
-
-/* NAV */
-.v-nav{height:60px;background:rgba(250,250,248,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:100;gap:14px}
+.v-nav{height:60px;background:rgba(250,250,248,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:100;gap:12px}
 .v-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.v-logo-mark{width:34px;height:34px;border-radius:9px;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:'Playfair Display',serif;box-shadow:0 2px 8px rgba(184,146,42,0.3)}
 .v-logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--heading);letter-spacing:-0.03em}
 .nav-pill{font-size:11px;color:var(--muted);font-weight:500;padding:3px 10px;background:var(--panel);border:1px solid var(--border);border-radius:20px}
 .nav-end{margin-left:auto;display:flex;align-items:center;gap:10px}
@@ -29,11 +19,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .nav-avatar{width:32px;height:32px;border-radius:50%;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;font-family:'Playfair Display',serif}
 .btn-signout{font-size:12px;font-weight:500;color:var(--muted);background:none;border:1px solid var(--border);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 120ms var(--ease)}
 .btn-signout:hover{color:var(--heading);border-color:var(--border2)}
-
-/* LAYOUT */
 .app-layout{display:flex;min-height:calc(100vh - 60px)}
-
-/* SIDEBAR */
 .sidebar{width:240px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;display:flex;flex-direction:column;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
 .sidebar-label{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:0 24px;margin-bottom:6px;display:block}
 .sidebar-section{padding:0 12px;margin-bottom:6px}
@@ -50,33 +36,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .sidebar-bottom{padding:12px;margin-top:auto;border-top:1px solid var(--border)}
 .sidebar-bottom-link{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;font-size:12px;color:var(--muted);text-decoration:none;transition:all 120ms var(--ease)}
 .sidebar-bottom-link:hover{color:var(--heading);background:var(--panel)}
-
-/* MAIN */
 .main{flex:1;padding:44px 52px;max-width:1060px}
 .page-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 .page-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--heading);letter-spacing:-0.025em;margin-bottom:6px}
 .page-subtitle{font-size:14px;color:var(--muted);margin-bottom:40px}
-
-/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:44px}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px 24px;transition:all 200ms var(--ease)}
 .stat-card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,0.06)}
 .stat-label{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .stat-value{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--heading);line-height:1}
 .stat-sub{font-size:11px;color:var(--muted);margin-top:5px}
-
-/* SECTION */
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--heading)}
-
-/* BUTTONS */
 .btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:8px 16px;border-radius:9px;border:none;cursor:pointer;transition:all 150ms var(--ease);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
 .btn-primary{background:var(--gold-btn);color:#fff;box-shadow:0 2px 8px rgba(184,146,42,0.25)}
 .btn-primary:hover{opacity:0.92;transform:translateY(-1px)}
 .btn-ghost{background:none;color:var(--muted);border:1px solid var(--border)}
 .btn-ghost:hover{color:var(--heading);background:var(--panel)}
-
-/* CLIENT CARDS */
 .clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
 .client-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;text-decoration:none;transition:all 200ms var(--ease);display:block;position:relative;overflow:hidden}
 .client-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-btn);opacity:0;transition:opacity 200ms}
@@ -87,14 +63,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .cc-name{font-size:15px;font-weight:700;color:var(--heading);margin-bottom:2px}
 .cc-role{font-size:12px;color:var(--muted)}
 .cc-footer{padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
-
-/* EMPTY */
 .empty-state{text-align:center;padding:60px 40px;border:1.5px dashed var(--border);border-radius:14px;grid-column:1/-1}
 .empty-icon{font-size:36px;margin-bottom:14px;opacity:0.4}
 .empty-state h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--heading);margin-bottom:8px;font-weight:700}
 .empty-state p{font-size:13px;color:var(--muted);margin-bottom:20px}
-
-/* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(26,26,34,0.45);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:480px;box-shadow:0 24px 60px rgba(0,0,0,0.15);animation:mIn .25s var(--ease) both}
@@ -108,14 +80,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 .v-input{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:10px 14px;font-size:14px;color:var(--heading);font-family:'DM Sans',sans-serif;transition:border-color 150ms var(--ease);outline:none;width:100%}
 .v-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,146,42,0.1)}
 .v-input::placeholder{color:var(--muted)}
-
-/* TOAST */
 .toast-wrap{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:999}
 .toast{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px 16px;font-size:13px;font-weight:500;color:var(--heading);box-shadow:0 8px 24px rgba(0,0,0,0.1);max-width:300px;opacity:0;transform:translateY(6px);transition:all .25s var(--ease)}
 .toast.show{opacity:1;transform:none}
 .toast.success{border-color:rgba(26,138,82,0.35);color:var(--success)}
 .toast.error{border-color:rgba(201,64,64,0.35);color:var(--danger)}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .a1{animation:fadeUp .45s var(--ease) both}
 .a2{animation:fadeUp .45s .08s var(--ease) both}
@@ -123,10 +92,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
 </style>
 </head>
 <body>
-
 <nav class="v-nav">
   <a href="dashboard.html" class="v-logo">
-    <div class="v-logo-mark">V</div>
+    <svg width="32" height="32" viewBox="0 0 56 56" fill="none"><rect width="56" height="56" rx="9" fill="url(#lg2)"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#c9a84c"/><stop offset="100%" stop-color="#8a6418"/></linearGradient></defs><rect x="13" y="22" width="5" height="12" rx="2.5" fill="rgba(255,255,255,0.5)"/><rect x="21" y="16" width="5" height="24" rx="2.5" fill="rgba(255,255,255,0.75)"/><rect x="29" y="12" width="5" height="32" rx="2.5" fill="#fff"/><rect x="37" y="18" width="5" height="20" rx="2.5" fill="rgba(255,255,255,0.75)"/></svg>
     <span class="v-logo-text">Voicely</span>
   </a>
   <span class="nav-pill" id="nav-agency-name">Loading...</span>
@@ -136,7 +104,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
     <button class="btn-signout" onclick="signOut()">Sign out</button>
   </div>
 </nav>
-
 <div class="app-layout">
   <aside class="sidebar">
     <div class="sidebar-section">
@@ -146,40 +113,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
     <div class="sidebar-divider"></div>
     <span class="sidebar-label" style="padding:0 24px;display:block;margin-bottom:8px">Clients</span>
     <div class="sidebar-clients" id="sidebar-clients"></div>
-    <div style="padding:0 12px;margin-top:6px">
-      <button class="sidebar-add" onclick="openNewClientModal()">+ Add client</button>
-    </div>
-    <div class="sidebar-bottom">
-      <a href="#" class="sidebar-bottom-link">⚙ &nbsp;Settings</a>
-    </div>
+    <div style="padding:0 12px;margin-top:6px"><button class="sidebar-add" onclick="openNewClientModal()">+ Add client</button></div>
+    <div class="sidebar-bottom"><a href="#" class="sidebar-bottom-link">⚙ &nbsp;Settings</a></div>
   </aside>
-
   <main class="main">
     <div class="a1">
       <div class="page-eyebrow">Overview</div>
       <h1 class="page-title" id="page-title">Dashboard</h1>
       <p class="page-subtitle">Welcome back — here's what's happening across your clients.</p>
     </div>
-
     <div class="stats-row a2">
       <div class="stat-card"><div class="stat-label">Clients</div><div class="stat-value" id="stat-clients">—</div><div class="stat-sub">Active profiles</div></div>
       <div class="stat-card"><div class="stat-label">Posts generated</div><div class="stat-value" id="stat-posts">—</div><div class="stat-sub">All time</div></div>
       <div class="stat-card"><div class="stat-label">Drafts</div><div class="stat-value" id="stat-drafts">—</div><div class="stat-sub">Awaiting review</div></div>
       <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" id="stat-approved">—</div><div class="stat-sub">Ready to publish</div></div>
     </div>
-
     <div class="a3">
-      <div class="section-header">
-        <h2 class="section-title">Your Clients</h2>
-        <button class="btn btn-primary" onclick="openNewClientModal()">+ New client</button>
-      </div>
+      <div class="section-header"><h2 class="section-title">Your Clients</h2><button class="btn btn-primary" onclick="openNewClientModal()">+ New client</button></div>
       <div class="clients-grid" id="clients-grid">
         <div class="empty-state"><div class="empty-icon">✦</div><h3>No clients yet</h3><p>Add your first client to start generating on-brand LinkedIn content.</p><button class="btn btn-primary" onclick="openNewClientModal()">+ Add first client</button></div>
       </div>
     </div>
   </main>
 </div>
-
 <div class="overlay" id="new-client-modal">
   <div class="modal">
     <div class="modal-header"><h3>New client</h3><button class="btn btn-ghost" onclick="closeNewClientModal()" style="padding:5px 10px">✕</button></div>
@@ -192,12 +148,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);min
     <div class="modal-footer"><button class="btn btn-ghost" onclick="closeNewClientModal()">Cancel</button><button class="btn btn-primary" onclick="createClient()">Create client →</button></div>
   </div>
 </div>
-
 <div class="toast-wrap" id="toasts"></div>
-
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-const sb = createClient('https://petnnkxvudxvtfjuzsdj.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBldG5ua3h2dWR4dnRmanV6c2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMTM2MTIsImV4cCI6MjA4ODc4OTYxMn0.wtP9hZj2i5qca_Ub2hotCJUlRbL7MLT4jNrKisSPA8A')
+import{createClient}from'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+const sb=createClient('https://petnnkxvudxvtfjuzsdj.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBldG5ua3h2dWR4dnRmanV6c2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMTM2MTIsImV4cCI6MjA4ODc4OTYxMn0.wtP9hZj2i5qca_Ub2hotCJUlRbL7MLT4jNrKisSPA8A')
 const{data:{session}}=await sb.auth.getSession()
 if(!session){window.location.href='voicely-login.html'}
 const user=session.user;let agencyId=null
@@ -205,7 +159,7 @@ const{data:membership}=await sb.from('agency_members').select('agency_id,role,ag
 if(!membership){
   const agencyName=user.email.split('@')[0]
   const{data:ag}=await sb.from('agencies').insert({name:agencyName,plan:'trial',trial_ends_at:new Date(Date.now()+30*86400000).toISOString()}).select().single()
-  if(ag){await sb.from('agency_members').insert({agency_id:ag.id,user_id:user.id,role:'owner'});agencyId=ag.id;document.getElementById('nav-agency-name').textContent=agencyName;document.getElementById('page-title').textContent=agencyName;document.getElementById('nav-avatar').textContent=agencyName[0].toUpperCase();document.getElementById('nav-trial').textContent='● 30d trial left'}
+  if(ag){await sb.from('agency_members').insert({agency_id:ag.id,user_id:user.id,role:'owner'});agencyId=ag.id;document.getElementById('nav-agency-name').textContent=agencyName;document.getElementById('page-title').textContent=agencyName;document.getElementById('nav-avatar').textContent=agencyName[0].toUpperCase()}
 }else{
   agencyId=membership.agency_id;const ag=membership.agencies
   document.getElementById('nav-agency-name').textContent=ag.name
