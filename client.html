@@ -531,7 +531,6 @@ let currentFilter = 'all'
 let selectedPillar = ''
 let lastGenerated = ''
 let selectedLang = 'en'
-let selectedLang = 'en'
 
 // ── Load agency ──────────────────────────────────
 const { data: membership } = await sb
@@ -627,11 +626,6 @@ window.selectLang = (el) => {
 }
 
 // ── Language selection ───────────────────────────
-window.selectLang = (el) => {
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'))
-  el.classList.add('active')
-  selectedLang = el.dataset.lang
-}
 
 // ── Generate post ────────────────────────────────
 window.generatePost = async () => {
