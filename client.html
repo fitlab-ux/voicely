@@ -419,9 +419,11 @@ window.saveClientProfile=async()=>{
 }
 document.getElementById('edit-modal').addEventListener('click',e=>{if(e.target===document.getElementById('edit-modal'))closeEditModal()})
 window.toast=(msg,type='')=>{const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;document.getElementById('toasts').appendChild(el);setTimeout(()=>el.classList.add('show'),10);setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),300)},3000)}
-await loadClient();await loadPosts();await loadTracks()
-window.switchMainTab=(tab,btn)=>{document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('panel-'+tab).classList.add('active');if(tab==='topics')loadTopics();if(tab==='tracks')loadTracks();if(tab==='news')loadNews()}
 let allTracks=[]
+let allTopics=[],currentTrackFilter='all'
+let allNews=[],currentNewsTrack='all'
+window.switchMainTab=(tab,btn)=>{document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('panel-'+tab).classList.add('active');if(tab==='topics')loadTopics();if(tab==='tracks')loadTracks();if(tab==='news')loadNews()}
+await loadClient();await loadPosts();await loadTracks()
 async function loadTracks(){
   const{data}=await sb.from('positioning_tracks').select('*').eq('client_id',clientId).order('created_at')
   allTracks=data||[];renderTracks();updateTrackFilter();updateTrackSelect();updateNewsTrackFilter()
@@ -460,7 +462,6 @@ window.saveTrack=async()=>{
 }
 window.deleteTrack=async(id)=>{if(!confirm('Delete this track?'))return;await sb.from('positioning_tracks').delete().eq('id',id);toast('Track deleted');await loadTracks()}
 document.getElementById('track-modal').addEventListener('click',e=>{if(e.target===document.getElementById('track-modal'))closeTrackModal()})
-let allTopics=[],currentTrackFilter='all'
 async function loadTopics(){
   const{data}=await sb.from('topics').select('*').eq('client_id',clientId).order('created_at',{ascending:false})
   allTopics=data||[];await loadTracks();renderTopics()
@@ -521,7 +522,6 @@ window.generateFromTopic=(id)=>{
   if(t.status==='open')updateTopicStatus(id,'in_progress')
 }
 document.getElementById('topic-modal').addEventListener('click',e=>{if(e.target===document.getElementById('topic-modal'))closeTopicModal()})
-let allNews=[],currentNewsTrack='all'
 window.loadNews=async function(){
   const el=document.getElementById('news-list');el.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-size:13px">Loading...</div>'
   const{data}=await sb.from('news_items').select('*').eq('client_id',clientId).order('published_at',{ascending:false}).limit(100)
