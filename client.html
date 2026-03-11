@@ -191,6 +191,17 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
 .track-keywords{display:flex;flex-wrap:wrap;gap:4px}
 .track-keyword{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:var(--v-subtle);color:var(--v-body);border:1px solid var(--v-border)}
 .track-card-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--v-border)}
+
+/* ── NEWS CARDS ─────────────────────────────────── */
+.news-card{background:var(--v-surface);border:1px solid var(--v-border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:box-shadow 150ms var(--ease)}
+.news-card:hover{box-shadow:0 4px 16px rgba(10,10,15,0.08)}
+.news-card-headline{font-size:14px;font-weight:600;color:var(--v-ink);line-height:1.45;text-decoration:none}
+.news-card-headline:hover{color:var(--v-signal)}
+.news-card-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.news-source{font-size:11px;font-weight:700;color:var(--v-muted)}
+.news-date{font-size:11px;color:var(--v-muted)}
+.news-keyword{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--v-signal-lt);color:var(--v-signal)}
+.news-card-actions{display:flex;gap:8px;margin-top:4px}
 </style>
 </head>
 <body>
@@ -300,6 +311,7 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
       <button class="main-tab active" onclick="switchMainTab('posts', this)">✍️ Posts</button>
       <button class="main-tab" onclick="switchMainTab('topics', this)">📋 Topic Library</button>
       <button class="main-tab" onclick="switchMainTab('tracks', this)">🎯 Positioning</button>
+      <button class="main-tab" onclick="switchMainTab('news', this)">📰 News Scout</button>
     </div>
 
     <!-- ── POSTS TAB ── -->
@@ -380,6 +392,32 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
         </div>
       </div>
     </div><!-- end panel-tracks -->
+
+    <!-- ── NEWS TAB ── -->
+    <div class="main-panel" id="panel-news">
+      <div class="posts-header">
+        <h2>News Scout</h2>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:12px;color:var(--v-muted)">Updated every 30 min</span>
+          <button class="btn btn-secondary" onclick="loadNews()">↺ Refresh</button>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--v-muted);margin-bottom:20px;max-width:560px">
+        Articles found by the News Scanner based on your positioning track keywords. Click any article to use it as inspiration for a post.
+      </p>
+
+      <!-- Track filter -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="news-track-filter">
+        <button class="track-filter-btn active" data-track="all" onclick="filterNews('all',this)">All tracks</button>
+      </div>
+
+      <div id="news-list" style="display:flex;flex-direction:column;gap:10px">
+        <div class="empty-state">
+          <div class="empty-icon">📰</div>
+          <h3>Loading news...</h3>
+        </div>
+      </div>
+    </div><!-- end panel-news -->
 
   </main>
 </div>
@@ -825,6 +863,7 @@ window.switchMainTab = (tab, btn) => {
   document.getElementById('panel-' + tab).classList.add('active')
   if (tab === 'topics') loadTopics()
   if (tab === 'tracks') loadTracks()
+  if (tab === 'news') loadNews()
 }
 
 // ── TRACKS ───────────────────────────────────────
@@ -1037,6 +1076,91 @@ window.openTopicDetail = (id) => {
 document.getElementById('topic-modal').addEventListener('click', e => {
   if (e.target === document.getElementById('topic-modal')) closeTopicModal()
 })
+
+
+// ── NEWS SCOUT ───────────────────────────────────
+let allNews = []
+let currentNewsTrack = 'all'
+
+async function loadNews() {
+  const el = document.getElementById('news-list')
+  el.innerHTML = '<div style="text-align:center;padding:40px;color:var(--v-muted);font-size:13px">Loading...</div>'
+
+  const { data } = await sb.from('news_items')
+    .select('*')
+    .eq('client_id', clientId)
+    .order('published_at', { ascending: false })
+    .limit(100)
+
+  allNews = data || []
+
+  // Build track filter
+  await loadTracks()
+  const filterBar = document.getElementById('news-track-filter')
+  filterBar.innerHTML = '<button class="track-filter-btn active" data-track="all" onclick="filterNews('all',this)">All tracks</button>'
+  allTracks.forEach(t => {
+    const btn = document.createElement('button')
+    btn.className = 'track-filter-btn'
+    btn.dataset.track = t.id
+    btn.textContent = t.name
+    btn.onclick = () => filterNews(t.id, btn)
+    filterBar.appendChild(btn)
+  })
+
+  renderNews()
+}
+
+function renderNews() {
+  const filtered = currentNewsTrack === 'all'
+    ? allNews
+    : allNews.filter(n => n.track_id === currentNewsTrack)
+
+  const el = document.getElementById('news-list')
+
+  if (!filtered.length) {
+    el.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">📰</div>
+      <h3>No news yet</h3>
+      <p>Add keywords to a positioning track — the scanner runs every 30 minutes.</p>
+    </div>`
+    return
+  }
+
+  el.innerHTML = filtered.map(n => {
+    const track = allTracks.find(t => t.id === n.track_id)
+    const date = n.published_at
+      ? new Date(n.published_at).toLocaleDateString('de-DE', { day:'numeric', month:'short', year:'numeric' })
+      : ''
+    return `<div class="news-card">
+      <a class="news-card-headline" href="${n.url}" target="_blank" rel="noopener">${n.headline}</a>
+      <div class="news-card-meta">
+        ${n.source ? `<span class="news-source">📰 ${n.source}</span>` : ''}
+        ${date ? `<span class="news-date">${date}</span>` : ''}
+        ${n.keyword ? `<span class="news-keyword">${n.keyword}</span>` : ''}
+        ${track ? `<span style="font-size:10px;font-weight:700;color:${track.color||'#5b4fff'};background:${track.color||'#5b4fff'}18;padding:2px 8px;border-radius:20px">${track.name}</span>` : ''}
+      </div>
+      <div class="news-card-actions">
+        <button class="btn btn-primary" style="font-size:11px;padding:5px 12px" onclick="useNewsAsInspiration('${n.id}')">✍️ Write post from this</button>
+        <a href="${n.url}" target="_blank" class="btn btn-ghost" style="font-size:11px;padding:5px 12px">Read article →</a>
+      </div>
+    </div>`
+  }).join('')
+}
+
+window.filterNews = (trackId, btn) => {
+  currentNewsTrack = trackId
+  document.querySelectorAll('#news-track-filter .track-filter-btn').forEach(b => b.classList.remove('active'))
+  btn.classList.add('active')
+  renderNews()
+}
+
+window.useNewsAsInspiration = (newsId) => {
+  const n = allNews.find(x => x.id === newsId)
+  if (!n) return
+  document.getElementById('gen-topic').value = n.headline
+  switchMainTab('posts', document.querySelector('.main-tab'))
+  toast('Article loaded into generator ↑', 'success')
+}
 
 </script>
 </body>
