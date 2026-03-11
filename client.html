@@ -514,8 +514,7 @@ window.generateFromTopic=(id)=>{
   const t=allTopics.find(x=>x.id===id);if(!t)return
   document.getElementById('gen-topic').value=t.title
   if(t.pillar){document.querySelectorAll('.pillar-chip').forEach(c=>{if(c.dataset.pillar===t.pillar){c.classList.add('selected');selectedPillar=t.pillar}})}
-  // Switch to Posts tab so user sees the generator context
-  const postsTab=document.querySelector('.main-tab')
+  const postsTab=document.querySelector('.main-tab[onclick*="posts"]')
   switchMainTab('posts',postsTab)
   toast('Topic loaded — click ⚡ Generate ↙','success')
   // Auto-mark as in_progress if still open
@@ -554,7 +553,7 @@ window.filterNews=(id,btn)=>{currentNewsTrack=id;document.querySelectorAll('#new
 window.useNews=(id)=>{
   const n=allNews.find(x=>x.id===id);if(!n)return
   document.getElementById('gen-topic').value=n.headline
-  const postsTab=document.querySelector('.main-tab')
+  const postsTab=document.querySelector('.main-tab[onclick*="posts"]')
   switchMainTab('posts',postsTab)
   toast('Article loaded — click ⚡ Generate ↙','success')
 }
