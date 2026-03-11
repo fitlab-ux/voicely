@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voicely — Sign in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --v-ink:       #0a0a0f;
+  --v-surface:   #ffffff;
+  --v-subtle:    #f7f7f9;
+  --v-border:    #e8e8ed;
+  --v-muted:     #8a8a99;
+  --v-body:      #3a3a4a;
+  --v-signal:    #5b4fff;
+  --v-signal-lt: #ede9ff;
+  --v-signal-dk: #3d35cc;
+  --v-success:   #16a34a;
+  --v-danger:    #dc2626;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; height: 100%; }
+
+body {
+  font-family: 'Syne', system-ui, sans-serif;
+  background: var(--v-subtle);
+  color: var(--v-body);
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── LEFT PANEL — Brand ─────────────────────────── */
+.left-panel {
+  background: var(--v-ink);
+  padding: 48px;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+
+/* Geometric background pattern */
+.left-panel::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(91,79,255,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(91,79,255,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Subtle grid lines */
+.left-panel::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.left-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; }
+
+.left-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; margin-bottom: auto;
+}
+.logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--v-signal);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-mark svg { width: 16px; height: 16px; fill: white; }
+.logo-text {
+  font-size: 22px; font-weight: 800; color: white;
+  letter-spacing: -0.03em;
+}
+
+.left-headline {
+  margin-top: auto; margin-bottom: 48px;
+}
+.left-headline h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800; color: white;
+  letter-spacing: -0.03em; line-height: 1.1;
+  margin-bottom: 16px;
+}
+.left-headline h2 em {
+  font-style: italic; color: rgba(91,79,255,0.9);
+  /* signal color on dark */
+  background: linear-gradient(135deg, #8b7fff, #5b4fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.left-headline p {
+  font-size: 15px; color: rgba(255,255,255,0.45);
+  line-height: 1.65; max-width: 360px;
+}
+
+/* Social proof strip */
+.social-proof {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 28px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.proof-quote {
+  font-size: 14px; color: rgba(255,255,255,0.6);
+  line-height: 1.65; font-style: italic;
+}
+.proof-quote::before { content: '"'; color: var(--v-signal); font-style: normal; font-weight: 800; margin-right: 2px; }
+.proof-quote::after  { content: '"'; color: var(--v-signal); font-style: normal; font-weight: 800; margin-left: 2px; }
+.proof-author {
+  display: flex; align-items: center; gap: 10px;
+}
+.proof-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #7c6fff, #4a3fff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: white; flex-shrink: 0;
+}
+.proof-name  { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8); }
+.proof-role  { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 1px; }
+
+/* Trial badge */
+.trial-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(91,79,255,0.15); border: 1px solid rgba(91,79,255,0.3);
+  border-radius: 999px; padding: 5px 12px;
+  font-size: 11px; font-weight: 700; color: #8b7fff;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 20px; width: fit-content;
+}
+.trial-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #8b7fff; animation: pulse 1.8s ease infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ── RIGHT PANEL — Form ─────────────────────────── */
+.right-panel {
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 40px;
+}
+
+.auth-box {
+  width: 100%; max-width: 400px;
+}
+
+.auth-tabs {
+  display: flex; gap: 2px; margin-bottom: 36px;
+  background: var(--v-border); border-radius: 10px; padding: 3px;
+}
+.auth-tab {
+  flex: 1; padding: 9px; border: none; background: none;
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
+  color: var(--v-muted); cursor: pointer; border-radius: 8px;
+  transition: all 150ms var(--ease);
+}
+.auth-tab.active {
+  background: var(--v-surface); color: var(--v-ink);
+  box-shadow: 0 1px 4px rgba(10,10,15,0.10);
+}
+
+/* Tab panels */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeUp 0.3s var(--ease) both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.auth-title {
+  font-size: 24px; font-weight: 800; color: var(--v-ink);
+  letter-spacing: -0.02em; margin-bottom: 6px;
+}
+.auth-subtitle { font-size: 14px; color: var(--v-muted); margin-bottom: 28px; line-height: 1.5; }
+
+/* Trial value prop */
+.trial-value {
+  background: var(--v-signal-lt);
+  border: 1px solid rgba(91,79,255,0.15);
+  border-radius: 10px; padding: 14px 16px;
+  margin-bottom: 24px;
+}
+.trial-value-title {
+  font-size: 13px; font-weight: 700; color: var(--v-signal);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.trial-value-list {
+  list-style: none; display: flex; flex-direction: column; gap: 5px;
+}
+.trial-value-list li {
+  font-size: 12px; color: var(--v-body);
+  display: flex; align-items: center; gap: 6px;
+}
+.trial-value-list li::before {
+  content: '✓'; color: var(--v-signal); font-weight: 800; flex-shrink: 0;
+}
+
+/* Form elements */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block; font-size: 13px; font-weight: 600;
+  color: var(--v-ink); margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  background: var(--v-surface);
+  border: 1.5px solid var(--v-border);
+  border-radius: 10px; padding: 11px 14px;
+  font-family: 'Syne', sans-serif; font-size: 14px;
+  color: var(--v-ink); outline: none;
+  transition: border 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+.form-input::placeholder { color: var(--v-muted); font-weight: 400; }
+.form-input:focus {
+  border-color: var(--v-signal);
+  box-shadow: 0 0 0 3px rgba(91,79,255,0.12);
+}
+.form-input.error { border-color: var(--v-danger); }
+.form-hint { font-size: 11px; color: var(--v-muted); margin-top: 5px; }
+.form-error { font-size: 11px; color: var(--v-danger); margin-top: 5px; display: none; }
+.form-error.show { display: block; }
+
+/* Password toggle */
+.input-wrap { position: relative; }
+.input-wrap .form-input { padding-right: 44px; }
+.password-toggle {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; color: var(--v-muted);
+  font-size: 16px; padding: 4px; transition: color 150ms;
+}
+.password-toggle:hover { color: var(--v-ink); }
+
+/* Agency name row */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Submit button */
+.btn-submit {
+  width: 100%; padding: 13px;
+  background: var(--v-signal); color: white; border: none;
+  border-radius: 10px; font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: all 150ms var(--ease);
+  box-shadow: 0 4px 16px rgba(91,79,255,0.3);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 8px;
+}
+.btn-submit:hover { background: var(--v-signal-dk); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(91,79,255,0.35); }
+.btn-submit:active { transform: none; }
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-submit .spinner {
+  width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white; border-radius: 50%;
+  animation: spin 0.7s linear infinite; display: none;
+}
+.btn-submit.loading .spinner { display: block; }
+.btn-submit.loading .btn-label { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Divider */
+.auth-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 20px 0; color: var(--v-muted); font-size: 12px;
+}
+.auth-divider::before, .auth-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--v-border);
+}
+
+/* No CC note */
+.no-cc {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 12px; color: var(--v-muted); margin-top: 16px;
+}
+.no-cc svg { width: 13px; height: 13px; fill: none; stroke: var(--v-muted); stroke-width: 2; }
+
+/* Link */
+.auth-link {
+  color: var(--v-signal); font-weight: 600; text-decoration: none;
+  transition: color 150ms;
+}
+.auth-link:hover { color: var(--v-signal-dk); }
+
+/* Success state */
+.success-state {
+  text-align: center; padding: 24px 0; display: none;
+  animation: fadeUp 0.4s var(--ease) both;
+}
+.success-state.show { display: block; }
+.success-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #dcfce7; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+.success-state h3 {
+  font-size: 20px; font-weight: 800; color: var(--v-ink);
+  margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.success-state p { font-size: 14px; color: var(--v-muted); line-height: 1.6; }
+.success-trial-info {
+  background: var(--v-signal-lt); border-radius: 10px;
+  padding: 14px 16px; margin: 20px 0; text-align: left;
+}
+.success-trial-info p { font-size: 13px; color: var(--v-signal); font-weight: 600; }
+.success-trial-info span { font-weight: 400; color: var(--v-body); }
+
+/* Error banner */
+.error-banner {
+  background: #fef2f2; border: 1px solid #fecaca;
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 13px; color: var(--v-danger);
+  margin-bottom: 16px; display: none;
+}
+.error-banner.show { display: block; }
+
+/* Terms */
+.terms-note {
+  font-size: 11px; color: var(--v-muted);
+  text-align: center; margin-top: 16px; line-height: 1.5;
+}
+.terms-note a { color: var(--v-muted); }
+
+/* Forgot password */
+.forgot-wrap {
+  display: flex; justify-content: flex-end; margin-top: -10px; margin-bottom: 16px;
+}
+.forgot-link {
+  font-size: 12px; color: var(--v-muted); text-decoration: none;
+  transition: color 150ms;
+}
+.forgot-link:hover { color: var(--v-signal); }
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 768px) {
+  body { grid-template-columns: 1fr; }
+  .left-panel { display: none; }
+  .right-panel { padding: 32px 24px; align-items: flex-start; padding-top: 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LEFT PANEL -->
+<div class="left-panel">
+  <div class="left-content">
+    <a href="index.html" class="left-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18A9 9 0 0012 3zM9 8h2v8H9V8zm4 0h2v8h-2V8z"/></svg>
+      </div>
+      <span class="logo-text">Voicely</span>
+    </a>
+
+    <div class="left-headline">
+      <div class="trial-badge">
+        <div class="trial-badge-dot"></div>
+        30-day free trial
+      </div>
+      <h2>Every client.<br>Their own <em>voice.</em><br>10× faster.</h2>
+      <p>The LinkedIn content platform built for agencies that manage multiple clients — without everything sounding like AI wrote it.</p>
+    </div>
+
+    <div class="social-proof">
+      <p class="proof-quote">We cut our time per client post from 75 minutes to under 10. And they actually sound like the person.</p>
+      <div class="proof-author">
+        <div class="proof-avatar">S</div>
+        <div>
+          <div class="proof-name">Sarah M.</div>
+          <div class="proof-role">Founder, Storyblend Agency · Munich</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+  <div class="auth-box">
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('signup')">Start free trial</button>
+      <button class="auth-tab" onclick="switchTab('login')">Sign in</button>
+    </div>
+
+    <!-- ── SIGNUP PANEL ── -->
+    <div class="tab-panel active" id="panel-signup">
+      <div id="signup-form-wrap">
+        <h1 class="auth-title">Start your 30-day trial</h1>
+        <p class="auth-subtitle">Full access. No credit card. Cancel anytime.</p>
+
+        <div class="trial-value">
+          <div class="trial-value-title">
+            <span>⚡</span> What you get — free for 30 days
+          </div>
+          <ul class="trial-value-list">
+            <li>Unlimited AI post generation</li>
+            <li>Up to 5 client profiles with custom voice</li>
+            <li>Content calendar & approval workflow</li>
+            <li>Daily news intelligence for post ideas</li>
+          </ul>
+        </div>
+
+        <div class="error-banner" id="signup-error"></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="signup-firstname">First name</label>
+            <input class="form-input" id="signup-firstname" type="text" placeholder="Anna" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signup-lastname">Last name</label>
+            <input class="form-input" id="signup-lastname" type="text" placeholder="Müller" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signup-agency">Agency name</label>
+          <input class="form-input" id="signup-agency" type="text" placeholder="Storyblend Agency" autocomplete="organization">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signup-email">Work email</label>
+          <input class="form-input" id="signup-email" type="email" placeholder="anna@storyblend.de" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signup-password">Password</label>
+          <div class="input-wrap">
+            <input class="form-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password">
+            <button class="password-toggle" type="button" onclick="togglePassword('signup-password', this)">👁</button>
+          </div>
+          <span class="form-hint">At least 8 characters</span>
+        </div>
+
+        <button class="btn-submit" id="signup-btn" onclick="handleSignup()">
+          <span class="btn-label">Start free trial →</span>
+          <div class="spinner"></div>
+        </button>
+
+        <div class="no-cc">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          No credit card required
+        </div>
+
+        <p class="terms-note">
+          By signing up you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </p>
+      </div>
+
+      <!-- Signup success -->
+      <div class="success-state" id="signup-success">
+        <div class="success-icon">🎉</div>
+        <h3>You're in.</h3>
+        <p>Check your inbox — we've sent a confirmation link to <strong id="success-email"></strong></p>
+        <div class="success-trial-info">
+          <p>Your 30-day trial starts now. <span>After that, choose a plan or your account switches to read-only — all your data stays safe.</span></p>
+        </div>
+        <a href="dashboard.html" class="btn-submit" style="text-decoration:none; margin-top: 0;">
+          <span class="btn-label">Go to dashboard →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── LOGIN PANEL ── -->
+    <div class="tab-panel" id="panel-login">
+      <h1 class="auth-title">Welcome back</h1>
+      <p class="auth-subtitle">Sign in to your Voicely workspace.</p>
+
+      <div class="error-banner" id="login-error"></div>
+
+      <div class="form-group">
+        <label class="form-label" for="login-email">Email</label>
+        <input class="form-input" id="login-email" type="email" placeholder="anna@storyblend.de" autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="login-password">Password</label>
+        <div class="input-wrap">
+          <input class="form-input" id="login-password" type="password" placeholder="Your password" autocomplete="current-password">
+          <button class="password-toggle" type="button" onclick="togglePassword('login-password', this)">👁</button>
+        </div>
+      </div>
+
+      <div class="forgot-wrap">
+        <a href="#" class="forgot-link" onclick="handleForgotPassword()">Forgot password?</a>
+      </div>
+
+      <button class="btn-submit" id="login-btn" onclick="handleLogin()">
+        <span class="btn-label">Sign in →</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div class="auth-divider">or</div>
+
+      <p style="text-align:center; font-size:13px; color: var(--v-muted);">
+        No account yet?
+        <a href="#" class="auth-link" onclick="switchTab('signup')">Start your free trial →</a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  // ── Init Supabase ────────────────────────────────
+  const SUPABASE_URL = 'https://petnnkxvudxvtfjuzsdj.supabase.co'
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBldG5ua3h2dWR4dnRmanV6c2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMTM2MTIsImV4cCI6MjA4ODc4OTYxMn0.wtP9hZj2i5qca_Ub2hotCJUlRbL7MLT4jNrKisSPA8A'
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+  // ── Redirect if already logged in ───────────────
+  const { data: { session } } = await supabase.auth.getSession()
+  if (session) window.location.href = 'dashboard.html'
+
+  // ── Expose handlers to window (onclick attrs) ───
+  window.switchTab = (tab) => {
+    document.querySelectorAll('.auth-tab').forEach((t, i) => {
+      t.classList.toggle('active', (tab === 'signup' && i === 0) || (tab === 'login' && i === 1))
+    })
+    document.getElementById('panel-signup').classList.toggle('active', tab === 'signup')
+    document.getElementById('panel-login').classList.toggle('active', tab === 'login')
+    hideErrors()
+  }
+
+  window.togglePassword = (id, btn) => {
+    const input = document.getElementById(id)
+    const isText = input.type === 'text'
+    input.type = isText ? 'password' : 'text'
+    btn.textContent = isText ? '👁' : '🙈'
+  }
+
+  function setLoading(btnId, loading) {
+    const btn = document.getElementById(btnId)
+    btn.disabled = loading
+    btn.classList.toggle('loading', loading)
+  }
+
+  function showError(id, msg) {
+    const el = document.getElementById(id)
+    el.textContent = msg
+    el.classList.add('show')
+  }
+
+  function hideErrors() {
+    document.querySelectorAll('.error-banner').forEach(e => e.classList.remove('show'))
+  }
+
+  // ── SIGNUP ───────────────────────────────────────
+  window.handleSignup = async () => {
+    hideErrors()
+    const firstName = document.getElementById('signup-firstname').value.trim()
+    const lastName  = document.getElementById('signup-lastname').value.trim()
+    const agency    = document.getElementById('signup-agency').value.trim()
+    const email     = document.getElementById('signup-email').value.trim()
+    const password  = document.getElementById('signup-password').value
+
+    if (!firstName || !lastName) return showError('signup-error', 'Please enter your first and last name.')
+    if (!agency)    return showError('signup-error', 'Please enter your agency name.')
+    if (!email)     return showError('signup-error', 'Please enter your work email.')
+    if (password.length < 8) return showError('signup-error', 'Password must be at least 8 characters.')
+
+    setLoading('signup-btn', true)
+
+    try {
+      // 1. Create auth user
+      const { data, error } = await supabase.auth.signUp({
+        email, password,
+        options: {
+          data: { full_name: `${firstName} ${lastName}` },
+          emailRedirectTo: `${location.origin}/dashboard.html`
+        }
+      })
+      if (error) throw error
+
+      const userId = data.user?.id
+      if (!userId) throw new Error('Signup failed. Please try again.')
+
+      // 2. Create agency
+      const trialEnds = new Date()
+      trialEnds.setDate(trialEnds.getDate() + 30)
+
+      const { data: agencyData, error: agencyError } = await supabase
+        .from('agencies')
+        .insert({
+          name: agency,
+          trial_ends_at: trialEnds.toISOString(),
+          plan: 'trial'
+        })
+        .select().single()
+
+      if (agencyError) throw agencyError
+
+      // 3. Add user as owner
+      await supabase.from('agency_members').insert({
+        agency_id: agencyData.id,
+        user_id: userId,
+        role: 'owner'
+      })
+
+      // 4. Show success
+      document.getElementById('signup-form-wrap').style.display = 'none'
+      document.getElementById('success-email').textContent = email
+      document.getElementById('signup-success').classList.add('show')
+
+    } catch (err) {
+      showError('signup-error', err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setLoading('signup-btn', false)
+    }
+  }
+
+  // ── LOGIN ────────────────────────────────────────
+  window.handleLogin = async () => {
+    hideErrors()
+    const email    = document.getElementById('login-email').value.trim()
+    const password = document.getElementById('login-password').value
+
+    if (!email)    return showError('login-error', 'Please enter your email.')
+    if (!password) return showError('login-error', 'Please enter your password.')
+
+    setLoading('login-btn', true)
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) throw error
+      window.location.href = 'dashboard.html'
+    } catch (err) {
+      const msg = err.message?.includes('Invalid login')
+        ? 'Incorrect email or password.'
+        : err.message || 'Sign in failed. Please try again.'
+      showError('login-error', msg)
+    } finally {
+      setLoading('login-btn', false)
+    }
+  }
+
+  // ── FORGOT PASSWORD ──────────────────────────────
+  window.handleForgotPassword = async () => {
+    const email = document.getElementById('login-email').value.trim()
+    if (!email) return showError('login-error', 'Enter your email above first, then click "Forgot password".')
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${location.origin}/login.html`
+    })
+    if (error) {
+      showError('login-error', error.message)
+    } else {
+      showError('login-error', '✓ Reset link sent — check your inbox.')
+      document.getElementById('login-error').style.background = '#dcfce7'
+      document.getElementById('login-error').style.borderColor = '#bbf7d0'
+      document.getElementById('login-error').style.color = '#15803d'
+    }
+  }
+
+  // ── Enter key support ────────────────────────────
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return
+    if (document.getElementById('panel-signup').classList.contains('active')) {
+      window.handleSignup()
+    } else {
+      window.handleLogin()
+    }
+  })
+</script>
+
+</body>
+</html>
