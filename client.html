@@ -54,6 +54,13 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
 .pillar-chip{font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;border:1.5px solid var(--v-border);cursor:pointer;transition:all 120ms var(--ease);background:var(--v-surface);color:var(--v-muted)}
 .pillar-chip.selected{border-color:var(--v-signal);background:var(--v-signal-lt);color:var(--v-signal)}
 
+/* Lang buttons */
+.lang-btn{font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;border:1.5px solid var(--v-border);cursor:pointer;background:var(--v-surface);color:var(--v-muted);font-family:"Syne",sans-serif;transition:all 120ms var(--ease)}
+.lang-btn.active{border-color:var(--v-signal);background:var(--v-signal-lt);color:var(--v-signal)}
+
+.lang-btn{font-size:12px;font-weight:700;padding:7px 16px;border-radius:8px;border:1.5px solid var(--v-border);cursor:pointer;background:var(--v-surface);color:var(--v-muted);font-family:"Syne",sans-serif;transition:all 120ms var(--ease);flex:1;text-align:center}
+.lang-btn.active{border-color:var(--v-signal);background:var(--v-signal-lt);color:var(--v-signal)}
+
 /* Generate button */
 .btn-generate{width:100%;padding:13px;background:var(--v-signal);color:white;border:none;border-radius:10px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 150ms var(--ease);box-shadow:0 4px 16px rgba(91,79,255,0.3);display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}
 .btn-generate:hover:not(:disabled){background:var(--v-signal-dk);transform:translateY(-1px);box-shadow:0 8px 24px rgba(91,79,255,0.35)}
@@ -222,6 +229,14 @@ body{font-family:'Syne',sans-serif;background:var(--v-subtle);color:var(--v-body
       </select>
     </div>
 
+    <div class="form-group">
+      <label class="form-label">Post language</label>
+      <div style="display:flex;gap:8px">
+        <button class="lang-btn active" data-lang="en" onclick="selectLang(this)">&#127468;&#127463; English</button>
+        <button class="lang-btn" data-lang="de" onclick="selectLang(this)">&#127465;&#127466; Deutsch</button>
+      </div>
+    </div>
+
     <button class="btn-generate" id="gen-btn" onclick="generatePost()">
       <span class="btn-label">⚡ Generate post</span>
       <div class="spinner"></div>
@@ -327,6 +342,8 @@ let allPosts = []
 let currentFilter = 'all'
 let selectedPillar = ''
 let lastGenerated = ''
+let selectedLang = 'en'
+let selectedLang = 'en'
 
 // ── Load agency ──────────────────────────────────
 const { data: membership } = await sb
@@ -414,6 +431,20 @@ window.selectPillar = (el) => {
   selectedPillar = el.dataset.pillar
 }
 
+// ── Language selection ───────────────────────────
+window.selectLang = (el) => {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'))
+  el.classList.add('active')
+  selectedLang = el.dataset.lang
+}
+
+// ── Language selection ───────────────────────────
+window.selectLang = (el) => {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'))
+  el.classList.add('active')
+  selectedLang = el.dataset.lang
+}
+
 // ── Generate post ────────────────────────────────
 window.generatePost = async () => {
   const topic = document.getElementById('gen-topic').value.trim()
@@ -440,15 +471,19 @@ window.generatePost = async () => {
   const btn = document.getElementById('gen-btn')
   btn.disabled = true; btn.classList.add('loading')
 
-  const prompt = `You are a ghostwriter for a LinkedIn thought leader.
+  const langInstruction = selectedLang === 'de'
+    ? 'Write the entire post in German (Deutsch). Use natural, professional German. Avoid Anglicisms unless standard in German business.'
+    : 'Write the entire post in English.'
+
+  const prompt = `You are an expert LinkedIn ghostwriter. Write posts that feel 100% human, earn saves, and spark real comments.
 
 CLIENT PROFILE:
 - Name: ${client.name}
 - Role: ${client.role_title || 'Professional'}
 - Focus: ${client.focus || 'Business and industry insights'}
-- Audience: ${client.audience || 'Professionals'}
-- Differentiator: ${client.differentiator || ''}
-- Avoid: ${client.avoid || ''}
+- Target audience: ${client.audience || 'Professionals'}
+- Unique angle: ${client.differentiator || ''}
+- Never mention: ${client.avoid || ''}
 
 TASK: Write a LinkedIn post on this topic: "${topic}"
 ${selectedPillar ? `Content pillar: ${selectedPillar}` : ''}
@@ -456,16 +491,18 @@ ${selectedPillar ? `Content pillar: ${selectedPillar}` : ''}
 TONE: ${toneMap[tone]}
 FORMAT: ${formatMap[format]}
 
-RULES:
-- Write in first person as ${client.name}
-- No hashtags unless 1-2 are genuinely useful
-- No emojis unless they add meaning
-- Max 1300 characters
-- Sound human, not AI-generated
-- No "I'm excited to share" or similar corporate filler
-- The hook must make someone stop scrolling
+LINKEDIN 2026 RULES:
+- LANGUAGE: ${langInstruction}
+- HOOK: First line must stop a mobile user in under 2 seconds. No corporate filler. Use tension, a number, a counter-intuitive claim, or a question.
+- NO MARKDOWN: No asterisks, no **bold**, no headers. Plain text only.
+- HUMAN VOICE: Write as ${client.name} speaks. Avoid: 'It is worth noting', 'In conclusion', 'Dive into', 'Landscape', 'Game-changer', 'Leverage'.
+- SAVE-WORTHY: Include one insight someone would screenshot.
+- CLOSING QUESTION: End with one specific question inviting real comments. Not 'What do you think?' but something concrete.
+- HASHTAGS: Exactly 3 specific hashtags at the end. No generic tags like #business #success.
+- LENGTH: 150-250 words. Short paragraphs of max 2-3 lines.
+- EMOJIS: Only 1-2 if they genuinely add meaning.
 
-Return ONLY the post text. No intro, no explanation.`
+Return ONLY the post text. Nothing else.`
 
   try {
     const res = await fetch('https://voicely-proxy.michael-huber.workers.dev', {
