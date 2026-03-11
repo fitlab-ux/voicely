@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voicely — Your clients' voice. Amplified.</title>
+<meta name="description" content="The LinkedIn content platform for agencies. Generate authentic, on-brand posts for every client — at scale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf8;--surface:#fff;--panel:#f4f4f1;--border:#e8e8e2;--border2:#d0d0c8;
+  --muted:#9898a0;--body:#52525e;--heading:#1a1a22;--dark:#0f0f14;
+  --gold:#b8922a;--gold-lt:rgba(184,146,42,0.09);--gold-md:rgba(184,146,42,0.16);
+  --gold-dk:#8a6a18;--gold-btn:linear-gradient(135deg,#c9a84c,#a07830);
+  --success:#1a8a52;--ease:cubic-bezier(0.16,1,0.3,1)
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);overflow-x:hidden}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(250,250,248,0.92);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-bottom-color:var(--border)}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-logo-mark{width:38px;height:38px;border-radius:10px;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;font-family:'Playfair Display',serif;box-shadow:0 3px 12px rgba(184,146,42,0.3)}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--heading);letter-spacing:-0.03em}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-link{font-size:14px;font-weight:500;color:var(--body);text-decoration:none;transition:color 120ms}
+.nav-link:hover{color:var(--heading)}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.nav-signin{font-size:13px;font-weight:600;color:var(--body);text-decoration:none;transition:color 120ms}
+.nav-signin:hover{color:var(--heading)}
+.nav-cta{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;padding:10px 22px;border-radius:10px;background:var(--gold-btn);color:#fff;text-decoration:none;box-shadow:0 2px 10px rgba(184,146,42,0.3);transition:all 150ms var(--ease)}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(184,146,42,0.4)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+/* Fine dot grid */
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,#d4d4ca 1px,transparent 1px);background-size:32px 32px;opacity:0.5;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent);pointer-events:none}
+/* Warm glow top */
+.hero::after{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(201,168,76,0.09) 0%,transparent 65%);pointer-events:none}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-lt);border:1px solid rgba(184,146,42,0.2);padding:6px 16px;border-radius:20px;margin-bottom:32px;position:relative;z-index:1;animation:fadeUp .5s var(--ease) both}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(48px,6.5vw,88px);font-weight:900;color:var(--heading);letter-spacing:-0.03em;line-height:1.05;margin-bottom:4px;position:relative;z-index:1;animation:fadeUp .5s .07s var(--ease) both}
+.hero-h1-em{font-family:'Playfair Display',serif;font-size:clamp(48px,6.5vw,88px);font-weight:900;font-style:italic;color:var(--gold);letter-spacing:-0.03em;line-height:1.05;margin-bottom:36px;position:relative;z-index:1;animation:fadeUp .5s .12s var(--ease) both;display:block}
+/* Underline accent */
+.hero-h1-em span{position:relative;display:inline-block}
+.hero-h1-em span::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:var(--gold-btn);border-radius:2px}
+
+.hero-sub{font-size:clamp(16px,1.8vw,19px);color:var(--body);line-height:1.7;max-width:520px;margin:0 auto 44px;position:relative;z-index:1;animation:fadeUp .5s .17s var(--ease) both}
+.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;animation:fadeUp .5s .22s var(--ease) both;margin-bottom:16px}
+.btn-hero{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;padding:16px 32px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all 200ms var(--ease)}
+.btn-hero-primary{background:var(--gold-btn);color:#fff;box-shadow:0 4px 20px rgba(184,146,42,0.3)}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,146,42,0.45)}
+.btn-hero-secondary{background:var(--surface);color:var(--body);border:1.5px solid var(--border)}
+.btn-hero-secondary:hover{color:var(--heading);border-color:var(--border2)}
+.hero-note{font-size:12px;color:var(--muted);position:relative;z-index:1;animation:fadeUp .5s .27s var(--ease) both}
+.hero-note strong{color:var(--body)}
+
+/* MOCK UI */
+.hero-visual{width:100%;max-width:680px;margin-top:72px;position:relative;z-index:1;animation:fadeUp .7s .35s var(--ease) both}
+.mock-shadow{position:absolute;inset:-2px;border-radius:18px;box-shadow:0 32px 80px rgba(26,26,34,0.12),0 8px 24px rgba(26,26,34,0.06);pointer-events:none}
+.mock{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.mock-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:11px 16px;display:flex;align-items:center;gap:8px}
+.mock-dot{width:10px;height:10px;border-radius:50%}
+.mock-dot-r{background:#fc5f5a}
+.mock-dot-y{background:#fdbc40}
+.mock-dot-g{background:#34ca49}
+.mock-bar-title{font-size:12px;color:var(--muted);margin-left:6px;font-weight:500}
+.mock-body{padding:24px}
+.mock-tabs{display:flex;border-bottom:1px solid var(--border);margin:-24px -24px 20px;padding:0 24px}
+.mock-tab{font-size:12px;font-weight:600;padding:12px 14px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.mock-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.mock-client-row{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.mock-av{width:42px;height:42px;border-radius:50%;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+.mock-client-name{font-size:14px;font-weight:700;color:var(--heading)}
+.mock-client-role{font-size:12px;color:var(--muted)}
+.mock-post{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:10px}
+.mock-post-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.mock-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
+.mock-b-approved{background:#edf7f2;color:var(--success);border:1px solid rgba(26,138,82,0.2)}
+.mock-b-pillar{background:var(--surface);color:var(--body);border:1px solid var(--border)}
+.mock-post-text{font-size:12.5px;color:var(--body);line-height:1.7;margin-bottom:12px}
+.mock-post-text strong{color:var(--heading);font-weight:600}
+.mock-hashtags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.mock-hashtag{font-size:10px;font-weight:700;color:var(--gold);background:var(--gold-lt);border:1px solid rgba(184,146,42,0.2);padding:2px 9px;border-radius:20px}
+.mock-post-actions{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border)}
+.mock-copy{font-size:11px;font-weight:700;color:#fff;background:var(--gold-btn);border:none;border-radius:7px;padding:6px 14px;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* ── SOCIAL PROOF ── */
+.social-proof{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:18px 0;overflow:hidden}
+.ticker-track{display:flex;gap:72px;align-items:center;animation:ticker 28s linear infinite;width:max-content}
+.ticker-track:hover{animation-play-state:paused}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--muted);white-space:nowrap}
+.ticker-item strong{color:var(--heading);font-weight:700}
+.ticker-sep{color:var(--border2);font-size:18px;font-weight:300}
+
+/* ── SECTIONS ── */
+section{padding:112px 48px}
+.section-inner{max-width:1080px;margin:0 auto}
+.s-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(30px,3.5vw,48px);font-weight:700;color:var(--heading);letter-spacing:-0.025em;line-height:1.15;margin-bottom:14px}
+.s-title em{font-style:italic;color:var(--gold)}
+.s-sub{font-size:17px;color:var(--body);line-height:1.7;max-width:500px}
+
+/* ── FEATURES ── */
+.features-bg{background:var(--surface)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.feat-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:28px 26px;transition:all 220ms var(--ease);position:relative;overflow:hidden}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-btn);opacity:0;transition:opacity 220ms}
+.feat-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.07)}
+.feat-card:hover::before{opacity:1}
+.feat-icon{width:46px;height:46px;border-radius:12px;background:var(--gold-lt);border:1px solid rgba(184,146,42,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px}
+.feat-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--heading);margin-bottom:10px}
+.feat-desc{font-size:14px;color:var(--body);line-height:1.7}
+.feat-tag{display:inline-block;margin-top:18px;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-lt);border:1px solid rgba(184,146,42,0.2);padding:3px 10px;border-radius:20px}
+
+/* FEATURE HIGHLIGHTS */
+.fh{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:96px}
+.fh.reverse{direction:rtl}
+.fh.reverse>*{direction:ltr}
+.fh-title{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--heading);letter-spacing:-0.02em;line-height:1.2;margin-bottom:14px}
+.fh-desc{font-size:16px;color:var(--body);line-height:1.75;margin-bottom:24px}
+.fh-points{display:flex;flex-direction:column;gap:10px}
+.fh-point{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--body);line-height:1.55}
+.fh-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:8px}
+.fh-visual{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,0.07)}
+
+/* ── HOW ── */
+.how-bg{background:var(--dark);position:relative;overflow:hidden}
+.how-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(201,168,76,0.07) 0%,transparent 65%);pointer-events:none}
+.how-bg .s-title{color:#eaeaf4}
+.how-bg .s-sub{color:rgba(255,255,255,0.5)}
+.how-bg .s-eyebrow{color:#c9a84c}
+.steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;position:relative}
+.steps-row::before{content:'';position:absolute;top:30px;left:16%;right:16%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),rgba(255,255,255,0.1),transparent)}
+.step{text-align:center}
+.step-num{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#c9a84c;margin:0 auto 18px;position:relative;z-index:1}
+.step-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#eaeaf4;margin-bottom:10px}
+.step-desc{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.65}
+
+/* ── TESTIMONIALS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px;transition:all 200ms var(--ease)}
+.testi-card:hover{border-color:var(--border2);box-shadow:0 8px 24px rgba(0,0,0,0.07)}
+.testi-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:14px}
+.testi-text{font-size:15px;color:var(--heading);line-height:1.7;margin-bottom:20px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:12px}
+.t-av{width:36px;height:36px;border-radius:50%;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff}
+.t-name{font-size:13px;font-weight:700;color:var(--heading)}
+.t-role{font-size:11px;color:var(--muted)}
+
+/* ── PRICING ── */
+.pricing-bg{background:var(--panel)}
+.pricing-wrap{display:flex;justify-content:center;margin-top:56px}
+.pricing-card{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:44px 48px;max-width:500px;width:100%;position:relative;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.08)}
+.pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gold-btn)}
+.pricing-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-lt);border:1px solid rgba(184,146,42,0.2);padding:5px 14px;border-radius:20px;margin-bottom:18px}
+.pricing-price{display:flex;align-items:baseline;gap:4px;margin-bottom:6px}
+.pricing-amount{font-family:'Playfair Display',serif;font-size:60px;font-weight:900;color:var(--heading);line-height:1}
+.pricing-cur{font-size:22px;color:var(--body);margin-top:10px}
+.pricing-per{font-size:14px;color:var(--muted);margin-top:10px}
+.pricing-trial{font-size:14px;font-weight:600;color:var(--gold);margin-bottom:28px}
+.pricing-divider{height:1px;background:var(--border);margin:24px 0}
+.pricing-features{display:flex;flex-direction:column;gap:13px;margin-bottom:32px}
+.pf{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--body)}
+.pf-check{color:var(--success);font-size:14px;font-weight:700;flex-shrink:0}
+.btn-pricing{display:block;width:100%;text-align:center;background:var(--gold-btn);color:#fff;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;padding:16px;border-radius:12px;text-decoration:none;box-shadow:0 4px 16px rgba(184,146,42,0.3);transition:all 200ms var(--ease)}
+.btn-pricing:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,146,42,0.45)}
+.pricing-note{text-align:center;font-size:12px;color:var(--muted);margin-top:12px}
+
+/* ── CTA BANNER ── */
+.cta-bg{background:var(--dark);text-align:center;padding:120px 48px;position:relative;overflow:hidden}
+.cta-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,168,76,0.09) 0%,transparent 65%);pointer-events:none}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,64px);font-weight:900;color:#eaeaf4;letter-spacing:-0.03em;line-height:1.1;margin-bottom:18px;position:relative}
+.cta-title em{color:#c9a84c;font-style:italic}
+.cta-sub{font-size:18px;color:rgba(255,255,255,0.45);max-width:460px;margin:0 auto 40px;line-height:1.7;position:relative}
+.cta-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:36px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;background:var(--surface)}
+.footer-logo{display:flex;align-items:center;gap:10px}
+.footer-mark{width:28px;height:28px;border-radius:7px;background:var(--gold-btn);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#fff}
+.footer-text{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--heading);letter-spacing:-0.02em}
+.footer-copy{font-size:12px;color:var(--muted)}
+.footer-links{display:flex;gap:24px}
+.footer-link{font-size:12px;color:var(--muted);text-decoration:none;transition:color 120ms}
+.footer-link:hover{color:var(--heading)}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:.05s}.rd2{transition-delay:.12s}.rd3{transition-delay:.19s}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* MINI UI MOCKUPS */
+.news-mini{display:flex;flex-direction:column;gap:7px}
+.news-mini-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px}
+.nmi-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
+.nmi-text{font-size:12px;color:var(--body);line-height:1.5}
+.nmi-text strong{color:var(--heading)}
+.nmi-tag{font-size:10px;font-weight:700;color:var(--gold);background:var(--gold-lt);padding:2px 7px;border-radius:20px;white-space:nowrap;margin-left:auto;flex-shrink:0}
+.kanban-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k-col{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px}
+.k-col-h{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.k-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.k-item{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:11px;color:var(--body);line-height:1.45;margin-bottom:4px}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .features-grid,.testi-grid{grid-template-columns:1fr}
+  .fh{grid-template-columns:1fr;gap:40px}
+  .steps-row{grid-template-columns:1fr}
+  .steps-row::before{display:none}
+  section{padding:72px 24px}
+  .nav,.cta-bg,footer{padding-left:24px;padding-right:24px}
+  .hero{padding:100px 24px 72px}
+  .kanban-mini{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">V</div>
+    <span class="nav-logo-text">Voicely</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+  </div>
+  <div class="nav-actions">
+    <a href="voicely-login.html" class="nav-signin">Sign in</a>
+    <a href="voicely-login.html" class="nav-cta">Start free trial →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="badge-dot"></span>LinkedIn Content Intelligence for Agencies</div>
+  <h1 class="hero-h1">Your clients' voice.</h1>
+  <div class="hero-h1-em"><span>Amplified.</span></div>
+  <p class="hero-sub">The content agency's secret weapon. Generate authentic LinkedIn posts for every client — at scale, in their voice, optimised for 2026.</p>
+  <div class="hero-actions">
+    <a href="voicely-login.html" class="btn-hero btn-hero-primary">⚡ Start free trial <span style="opacity:.7;font-size:12px;font-weight:500">30 days free</span></a>
+    <a href="#features" class="btn-hero btn-hero-secondary">See how it works →</a>
+  </div>
+  <p class="hero-note"><strong>No credit card required.</strong> Full access for 30 days. Cancel anytime.</p>
+
+  <!-- MOCK UI -->
+  <div class="hero-visual">
+    <div class="mock-shadow"></div>
+    <div class="mock">
+      <div class="mock-bar">
+        <div class="mock-dot mock-dot-r"></div>
+        <div class="mock-dot mock-dot-y"></div>
+        <div class="mock-dot mock-dot-g"></div>
+        <span class="mock-bar-title">Voicely — Sarah Müller · Posts</span>
+      </div>
+      <div class="mock-body">
+        <div class="mock-tabs">
+          <div class="mock-tab active">✍️ Posts</div>
+          <div class="mock-tab">📋 Topics</div>
+          <div class="mock-tab">📰 News Scout</div>
+        </div>
+        <div class="mock-client-row">
+          <div class="mock-av">S</div>
+          <div><div class="mock-client-name">Sarah Müller</div><div class="mock-client-role">Head of Marketing · B2B SaaS</div></div>
+        </div>
+        <div class="mock-post">
+          <div class="mock-post-meta">
+            <span class="mock-badge mock-b-approved">✓ Approved</span>
+            <span class="mock-badge mock-b-pillar">Market Insight</span>
+            <span style="margin-left:auto;font-size:10px;color:var(--muted)">11 Mar</span>
+          </div>
+          <div class="mock-post-text">
+            <strong>30 Jahre Erfahrung. Ein Exit in 6 Monaten.</strong><br><br>
+            Migros hat Tegut verkauft. Nicht restrukturiert. Vollständig exitiert.<br>
+            Das ist kein Scheitern — das ist strategische Ehrlichkeit.<br><br>
+            Drei Lektionen für jeden Marketer: Market Timing schlägt Market Share. Skalierung in einem Markt garantiert nichts im nächsten. Der mutigste Move ist manchmal: aufhören.
+          </div>
+          <div class="mock-hashtags">
+            <span class="mock-hashtag">#RetailStrategy</span>
+            <span class="mock-hashtag">#EuropeanMarkets</span>
+            <span class="mock-hashtag">#B2BInsights</span>
+          </div>
+          <div class="mock-post-actions">
+            <span style="font-size:11px;color:var(--muted)">Generated in 3s · German</span>
+            <button class="mock-copy">Copy to LinkedIn →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF TICKER -->
+<div class="social-proof">
+  <div class="ticker-track">
+    <div class="ticker-item"><strong>⚡ AI-powered</strong> post generation</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>🇩🇪 🇬🇧</strong> DE + EN language toggle</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>📰 News Scout</strong> scans every 30 min</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>🎯 Positioning Tracks</strong> per client</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>✓ Approval workflow</strong> built-in</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>📋 Topic Library</strong> with Kanban board</div>
+    <div class="ticker-sep">·</div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><strong>⚡ AI-powered</strong> post generation</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>🇩🇪 🇬🇧</strong> DE + EN language toggle</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>📰 News Scout</strong> scans every 30 min</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>🎯 Positioning Tracks</strong> per client</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>✓ Approval workflow</strong> built-in</div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><strong>📋 Topic Library</strong> with Kanban board</div>
+    <div class="ticker-sep">·</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features" class="features-bg">
+  <div class="section-inner">
+    <div class="reveal"><span class="s-eyebrow">Everything you need</span><h2 class="s-title">Built for content agencies.<br><em>Loved by their clients.</em></h2><p class="s-sub">Every feature designed to save time, protect voice authenticity, and scale your agency output.</p></div>
+    <div class="features-grid">
+      <div class="feat-card reveal rd1">
+        <div class="feat-icon">⚡</div>
+        <div class="feat-title">AI Post Generation</div>
+        <div class="feat-desc">Claude Haiku 4.5, tuned for LinkedIn 2026. 5 tones, 5 formats, DE/EN toggle. Posts in under 5 seconds.</div>
+        <span class="feat-tag">Core Feature</span>
+      </div>
+      <div class="feat-card reveal rd2">
+        <div class="feat-icon">📰</div>
+        <div class="feat-title">News Scout</div>
+        <div class="feat-desc">Cloudflare Worker scans Google News every 30 minutes based on your client's positioning keywords. Real articles, real inspiration.</div>
+        <span class="feat-tag">Automated</span>
+      </div>
+      <div class="feat-card reveal rd3">
+        <div class="feat-icon">🎯</div>
+        <div class="feat-title">Positioning Tracks</div>
+        <div class="feat-desc">Define multiple brand identities per client. Each track has keywords, accent color, and feeds directly into News Scout.</div>
+        <span class="feat-tag">Strategy</span>
+      </div>
+      <div class="feat-card reveal rd1">
+        <div class="feat-icon">📋</div>
+        <div class="feat-title">Topic Library</div>
+        <div class="feat-desc">Kanban board with Open / In Progress / Used columns. Plan content weeks ahead. One click to generate from any topic.</div>
+        <span class="feat-tag">Planning</span>
+      </div>
+      <div class="feat-card reveal rd2">
+        <div class="feat-icon">✅</div>
+        <div class="feat-title">Approval Workflow</div>
+        <div class="feat-desc">Draft → In Review → Approved → Published. Built-in status tracking. Copy approved posts directly to LinkedIn.</div>
+        <span class="feat-tag">Workflow</span>
+      </div>
+      <div class="feat-card reveal rd3">
+        <div class="feat-icon">🏢</div>
+        <div class="feat-title">Multi-Client Agency</div>
+        <div class="feat-desc">Unlimited clients per workspace. Each with their own profile, voice, topics, and content history. Full separation.</div>
+        <span class="feat-tag">Scale</span>
+      </div>
+    </div>
+
+    <!-- FEATURE HIGHLIGHT 1: News Scout -->
+    <div class="fh reveal" style="margin-top:96px">
+      <div class="fh-content">
+        <span class="s-eyebrow">News Scout</span>
+        <div class="fh-title">Never run out of<br>relevant topics.</div>
+        <p class="fh-desc">A Cloudflare Worker runs every 30 minutes, scanning Google News for articles matching each client's positioning keywords. Fresh content ideas, always ready.</p>
+        <div class="fh-points">
+          <div class="fh-point"><div class="fh-dot"></div><span>Scans automatically — no manual searching required</span></div>
+          <div class="fh-point"><div class="fh-dot"></div><span>Articles linked to positioning tracks for context</span></div>
+          <div class="fh-point"><div class="fh-dot"></div><span>One click: "Write post from this article"</span></div>
+        </div>
+      </div>
+      <div class="fh-visual">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px">📰 Latest articles — Real Estate Expert</div>
+        <div class="news-mini">
+          <div class="news-mini-item"><div class="nmi-dot"></div><div class="nmi-text"><strong>Migros verkauft Tegut nach Deutschland-Exit</strong><br>Handelsblatt · 11 Mar</div><div class="nmi-tag">Einzelhandel</div></div>
+          <div class="news-mini-item"><div class="nmi-dot"></div><div class="nmi-text"><strong>Lebensmitteleinzelhandel trotzt Rezession</strong><br>FAZ · 10 Mar</div><div class="nmi-tag">Food Retail</div></div>
+          <div class="news-mini-item"><div class="nmi-dot"></div><div class="nmi-text"><strong>REPE-Investoren setzen auf defensive Assets</strong><br>Immobilien Zeitung · 9 Mar</div><div class="nmi-tag">REPE</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE HIGHLIGHT 2: Topic Library -->
+    <div class="fh reverse reveal">
+      <div class="fh-content">
+        <span class="s-eyebrow">Topic Library</span>
+        <div class="fh-title">Plan months ahead.<br>Execute in seconds.</div>
+        <p class="fh-desc">A Kanban board for content ideas — organised by positioning track and pillar. When you're ready to write, click once to load the topic into the generator.</p>
+        <div class="fh-points">
+          <div class="fh-point"><div class="fh-dot"></div><span>Kanban: Open → In Progress → Used</span></div>
+          <div class="fh-point"><div class="fh-dot"></div><span>Assign to positioning track and content pillar</span></div>
+          <div class="fh-point"><div class="fh-dot"></div><span>Schedule topics with planned date</span></div>
+        </div>
+      </div>
+      <div class="fh-visual">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px">📋 Topic Library — Sarah Müller</div>
+        <div class="kanban-mini">
+          <div class="k-col"><div class="k-col-h"><div class="k-dot" style="background:var(--muted)"></div>Open</div><div class="k-item">Why food retail beats office in 2026</div><div class="k-item">The hidden risk in B2B SaaS valuations</div></div>
+          <div class="k-col"><div class="k-col-h"><div class="k-dot" style="background:#d97706"></div>In Progress</div><div class="k-item">Migros Tegut — 3 lessons for marketers</div></div>
+          <div class="k-col"><div class="k-col-h"><div class="k-dot" style="background:var(--success)"></div>Used</div><div class="k-item">Why I stopped using slide decks</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-bg">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto">
+      <span class="s-eyebrow">How it works</span>
+      <h2 class="s-title" style="color:#eaeaf4">From news to published post<br><em>in under 5 minutes.</em></h2>
+    </div>
+    <div class="steps-row">
+      <div class="step reveal rd1">
+        <div class="step-num">1</div>
+        <div class="step-title">Set up your client</div>
+        <div class="step-desc">Add a client profile with their role, focus, audience, and what to avoid. Define positioning tracks with keywords for News Scout.</div>
+      </div>
+      <div class="step reveal rd2">
+        <div class="step-num">2</div>
+        <div class="step-title">Pick a topic or news</div>
+        <div class="step-desc">Browse auto-scanned articles in News Scout, or pick from the Topic Library. One click loads it into the AI generator.</div>
+      </div>
+      <div class="step reveal rd3">
+        <div class="step-num">3</div>
+        <div class="step-title">Generate, review, publish</div>
+        <div class="step-desc">Choose tone, format and language. Generate in seconds. Send for review, approve, and copy directly to LinkedIn.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto">
+      <span class="s-eyebrow">What agencies say</span>
+      <h2 class="s-title">Trusted by content teams<br><em>across DACH.</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal rd1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"We cut our LinkedIn content production time by 70%. Every post still sounds exactly like our clients — not like AI."</p>
+        <div class="testi-author"><div class="t-av">K</div><div><div class="t-name">Katharina B.</div><div class="t-role">Content Strategist, München</div></div></div>
+      </div>
+      <div class="testi-card reveal rd2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The News Scout is a game changer. I used to spend an hour each morning looking for post ideas. Now Voicely does it automatically."</p>
+        <div class="testi-author"><div class="t-av">M</div><div><div class="t-name">Markus H.</div><div class="t-role">Founder, B2B Content Agency</div></div></div>
+      </div>
+      <div class="testi-card reveal rd3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"My clients ask me how I always find the most relevant topics. I don't tell them. That's my Voicely advantage."</p>
+        <div class="testi-author"><div class="t-av">L</div><div><div class="t-name">Laura S.</div><div class="t-role">Freelance LinkedIn Manager, Hamburg</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing-bg">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:520px;margin:0 auto">
+      <span class="s-eyebrow">Simple pricing</span>
+      <h2 class="s-title">One plan.<br><em>Everything included.</em></h2>
+      <p class="s-sub" style="margin:0 auto">No tiers. No feature limits. No surprises.</p>
+    </div>
+    <div class="pricing-wrap reveal">
+      <div class="pricing-card">
+        <div class="pricing-badge">Agency Plan</div>
+        <div class="pricing-price"><span class="pricing-cur">€</span><span class="pricing-amount">149</span></div>
+        <div class="pricing-per">per month · billed monthly</div>
+        <div class="pricing-trial">✦ First 30 days completely free</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pf"><span class="pf-check">✓</span><span>Unlimited clients & posts</span></div>
+          <div class="pf"><span class="pf-check">✓</span><span>AI post generation (DE + EN)</span></div>
+          <div class="pf"><span class="pf-check">✓</span><span>News Scout — auto-scan every 30 min</span></div>
+          <div class="pf"><span class="pf-check">✓</span><span>Positioning Tracks & Topic Library</span></div>
+          <div class="pf"><span class="pf-check">✓</span><span>Approval workflow</span></div>
+          <div class="pf"><span class="pf-check">✓</span><span>Full access during trial</span></div>
+        </div>
+        <a href="voicely-login.html" class="btn-pricing">Start free trial — no credit card →</a>
+        <p class="pricing-note">Cancel anytime. No contracts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-bg">
+  <div class="section-inner" style="text-align:center">
+    <div class="reveal">
+      <h2 class="cta-title">Ready to amplify<br><em>every voice?</em></h2>
+      <p class="cta-sub">Join content agencies across DACH who use Voicely to deliver more, faster — without compromising authenticity.</p>
+      <div class="cta-actions">
+        <a href="voicely-login.html" class="btn-hero btn-hero-primary">⚡ Start free trial</a>
+        <a href="voicely-login.html" class="btn-hero btn-hero-secondary" style="border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)">Sign in →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-mark">V</div>
+    <span class="footer-text">Voicely</span>
+  </div>
+  <div class="footer-copy">© 2026 Voicely. Your clients' voice. Amplified.</div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Privacy</a>
+    <a href="#" class="footer-link">Terms</a>
+    <a href="voicely-login.html" class="footer-link">Sign in</a>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20)})
+
+// Scroll reveal
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'})
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el))
+</script>
+</body>
+</html>
