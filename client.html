@@ -1097,7 +1097,7 @@ async function loadNews() {
   // Build track filter
   await loadTracks()
   const filterBar = document.getElementById('news-track-filter')
-  filterBar.innerHTML = '<button class="track-filter-btn active" data-track="all" onclick="filterNews('all',this)">All tracks</button>'
+  filterBar.innerHTML = '<button class="track-filter-btn active" data-track="all" onclick="filterNews(&quot;all&quot;,this)">All tracks</button>'
   allTracks.forEach(t => {
     const btn = document.createElement('button')
     btn.className = 'track-filter-btn'
