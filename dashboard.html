@@ -376,7 +376,28 @@ const { data: membership } = await sb
   .eq('user_id', user.id)
   .single()
 
-if (membership) {
+if (!membership) {
+  // No agency found — auto-create one for this user
+  const agencyName = user.email.split('@')[0]
+  const { data: newAgency } = await sb.from('agencies').insert({
+    name: agencyName,
+    plan: 'trial',
+    trial_ends_at: new Date(Date.now() + 30 * 86400000).toISOString()
+  }).select().single()
+
+  if (newAgency) {
+    await sb.from('agency_members').insert({
+      agency_id: newAgency.id,
+      user_id: user.id,
+      role: 'owner'
+    })
+    agencyId = newAgency.id
+    document.getElementById('nav-agency-name').textContent = agencyName
+    document.getElementById('page-title').textContent = agencyName
+    document.getElementById('nav-avatar').textContent = agencyName[0].toUpperCase()
+    document.getElementById('nav-trial').textContent = '● 30d trial left'
+  }
+} else {
   agencyId = membership.agency_id
   const agency = membership.agencies
   document.getElementById('nav-agency-name').textContent = agency.name
